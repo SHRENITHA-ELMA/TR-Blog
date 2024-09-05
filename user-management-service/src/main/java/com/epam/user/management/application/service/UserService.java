@@ -2,9 +2,11 @@ package com.epam.user.management.application.service;
 
 import com.epam.user.management.application.entity.User;
 import com.epam.user.management.application.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class UserService {
 
     private final UserRepository userRepository;
@@ -12,14 +14,14 @@ public class UserService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    public User getUserById(Long id)
+    public Optional<User> getUserById(Long id)
     {
-        Optional<User> user =userRepository.findById(id);
-        if(user.isPresent())
-        {
-            return user.get();
-        }
-        return null;
+        return userRepository.findById(id);
+    }
+
+    public Optional<User> getUserByEmail(String email)
+    {
+        return userRepository.findByEmail(email);
     }
 
 }

@@ -6,6 +6,8 @@ import com.epam.travel.management.application.feignClient.UserClient;
 import com.epam.travel.management.application.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ReviewService {
 
@@ -18,15 +20,13 @@ public class ReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-    public User getUserById(Long userId) {
+    public Optional<User> getUserById(Long userId) {
         return userClient.getUserById(userId);
     }
 
-    public Review createReview(Long userId , String description , double rating )
+    public Review createReview(String description , double rating ,User user)
     {
-        User user=userClient.getUserById(userId);
-
-        Review review= Review.builder().userId(userId).userName(user.getFirstName()+user.getLastName()).imageUrl(user.getImageUrl()).description(description).rating(rating).build();
+        Review review= Review.builder().userId(user.getId()).userName(user.getFirstName()+user.getLastName()).imageUrl(user.getImageUrl()).description(description).rating(rating).build();
 
         return reviewRepository.save(review);
     }

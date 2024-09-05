@@ -7,17 +7,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.security.core.GrantedAuthority;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
+@Table(name = "blogs")
 public class Blog {
 
     @Id
@@ -38,10 +38,10 @@ public class Blog {
     private boolean isEnabled;
 
     @CreationTimestamp
-    private LocalDateTime createdAt;
+    private Date createdAt;
 
     @UpdateTimestamp
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
 
     @Column(nullable = false)
     private double rating;
