@@ -1,20 +1,21 @@
-package com.epam.user.management.application.service;
+package com.epam.user.management.application.serviceImpl;
 import com.epam.user.management.application.dto.*;
 import com.epam.user.management.application.entity.User;
 import com.epam.user.management.application.exception.AuthorizationException;
 import com.epam.user.management.application.exception.UserAlreadyExistsException;
 import com.epam.user.management.application.exception.UserNotFoundException;
 import com.epam.user.management.application.repository.UserRepository;
+import com.epam.user.management.application.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
-public class AdminServiceImpl implements AdminService{
+public class AdminServiceImpl implements AdminService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 

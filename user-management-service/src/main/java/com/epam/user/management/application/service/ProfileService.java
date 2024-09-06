@@ -7,5 +7,5 @@ import java.io.IOException;
 
 public interface ProfileService {
     UserResponse getProfileByUsers(String email);
-    void updateUser(String email , String firstName , String lastName , String gender,String password,String country , String city , MultipartFile file) throws IOException;
+    void updateUser(String emailFromToken,String email , String firstName , String lastName , String gender,String password,String country , String city , MultipartFile file) throws IOException;
 }

@@ -5,33 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7913068-9ae7-458a-b738-42cb18ca8a9e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/user-management-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/config/AdditionalResourceWebConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/config/AdditionalResourceWebConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/config/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/config/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/config/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/controller/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/controller/PasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/controller/PasswordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/controller/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/controller/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/dto/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/dto/ApiResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/dto/ForgotPasswordResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/dto/ForgotPasswordResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/dto/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/dto/LoginRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/dto/LogoutResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/dto/LogoutResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/dto/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/dto/RegisterRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/dto/ResetPasswordRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/dto/ResetPasswordRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/dto/UserProfileRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/dto/UserProfileRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/handler/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/handler/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/service/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/service/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/service/AuthenticationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/serviceImpl/AuthenticationServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/service/FileStorageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/service/FileStorageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/service/FileStorageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/serviceImpl/FileStorageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/service/JwtServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/serviceImpl/JwtServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/service/PasswordServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/serviceImpl/PasswordServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/service/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/serviceImpl/AdminServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/service/ProfileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/service/ProfileService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/service/ProfileServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/serviceImpl/ProfileServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/AuthenticationServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/service/AuthenticationServiceTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/PasswordServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/service/PasswordServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/ProfileServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/service/ProfileServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/serviceImpl/ProfileServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/serviceImpl/ProfileServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/controller/AdminControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/controller/AdminControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/dto/UserEnableDisableRequestTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/dto/UserEnableDisableRequestTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/service/AdminServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/service/AdminServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/service/ProfileServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/service/ProfileServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +75,9 @@
     "JUnit.AuthenticationControllerTest.executor": "Run",
     "JUnit.AuthenticationServiceTest.executor": "Run",
     "JUnit.PasswordServiceImplTest.executor": "Run",
+    "JUnit.ProfileServiceTest.executor": "Coverage",
+    "JUnit.ProfileServiceTest.testGetProfileByUsers_UserFound.executor": "Run",
+    "JUnit.ProfileServiceTest.testNoFileUploaded.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
@@ -113,62 +99,16 @@
       <recent name="com.epam.user.management.application.service" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.UserServiceApplication">
+  <component name="RunManager" selected="JUnit.ProfileServiceTest">
     <configuration name="UserServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.epam.user.management.application.UserServiceApplication" />
       <module name="user-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.epam.user.management.application.service.*" />
+          <option name="PATTERN" value="com.epam.user.management.application.serviceImpl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AuthenticationControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="user-management-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.epam.user.management.application.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.epam.user.management.application.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.epam.user.management.application.controller.AuthenticationControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AuthenticationControllerTest.authenticate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="user-management-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.epam.user.management.application.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.epam.user.management.application.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.epam.user.management.application.controller.AuthenticationControllerTest" />
-      <option name="METHOD_NAME" value="authenticate" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AuthenticationServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="user-management-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.epam.user.management.application.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.epam.user.management.application.service" />
-      <option name="MAIN_CLASS_NAME" value="com.epam.user.management.application.service.AuthenticationServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -177,13 +117,60 @@
       <module name="user-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.epam.user.management.application.service.*" />
+          <option name="PATTERN" value="com.epam.user.management.application.serviceImpl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.epam.user.management.application.service" />
       <option name="MAIN_CLASS_NAME" value="com.epam.user.management.application.service.PasswordServiceImplTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProfileServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="user-management-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.epam.user.management.application.serviceImpl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.epam.user.management.application.service" />
+      <option name="MAIN_CLASS_NAME" value="com.epam.user.management.application.service.ProfileServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProfileServiceTest.testGetProfileByUsers_UserFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="user-management-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.epam.user.management.application.serviceImpl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.epam.user.management.application.service" />
+      <option name="MAIN_CLASS_NAME" value="com.epam.user.management.application.service.ProfileServiceTest" />
+      <option name="METHOD_NAME" value="testGetProfileByUsers_UserFound" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProfileServiceTest.testNoFileUploaded" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="user-management-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.epam.user.management.application.serviceImpl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.epam.user.management.application.service" />
+      <option name="MAIN_CLASS_NAME" value="com.epam.user.management.application.service.ProfileServiceTest" />
+      <option name="METHOD_NAME" value="testNoFileUploaded" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -203,11 +190,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ProfileServiceTest" />
+        <item itemvalue="JUnit.ProfileServiceTest.testNoFileUploaded" />
+        <item itemvalue="JUnit.ProfileServiceTest.testGetProfileByUsers_UserFound" />
         <item itemvalue="Application.UserServiceApplication" />
         <item itemvalue="JUnit.PasswordServiceImplTest" />
-        <item itemvalue="JUnit.AuthenticationControllerTest" />
-        <item itemvalue="JUnit.AuthenticationServiceTest" />
-        <item itemvalue="JUnit.AuthenticationControllerTest.authenticate" />
       </list>
     </recent_temporary>
   </component>
@@ -221,5 +208,10 @@
       <updated>1725537052708</updated>
     </task>
     <servers />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/TR_Blog$ProfileServiceTest.ic" NAME="ProfileServiceTest Coverage Results" MODIFIED="1725615967149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.epam.user.management.application.service.*</FILTER>
+    </SUITE>
   </component>
 </project>

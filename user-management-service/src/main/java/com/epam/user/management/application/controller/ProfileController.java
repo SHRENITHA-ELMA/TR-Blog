@@ -5,6 +5,7 @@ import com.epam.user.management.application.dto.UserProfileRequest;
 import com.epam.user.management.application.dto.UserResponse;
 import com.epam.user.management.application.service.JwtService;
 import com.epam.user.management.application.service.ProfileService;
+import com.epam.user.management.application.utility.TokenUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,13 +27,12 @@ public class ProfileController {
 
     private final JwtService jwtService;
     private final ProfileService profileService;
+    private final TokenUtils tokenUtils;
 
 
     @GetMapping("/view")
     public ResponseEntity<ApiResponse<UserResponse>> getProfile(HttpServletRequest request) {
-        String authorizationHeader = request.getHeader("Authorization");
-        String token = authorizationHeader.substring(7);
-        String email = jwtService.extractUsername(token);
+        String email=tokenUtils.getEmailFromRequest(request);
 
         UserResponse userResponse = profileService.getProfileByUsers(email);
 
@@ -43,7 +43,8 @@ public class ProfileController {
 
     @PutMapping(value = "/editProfile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ApiResponse<Void>> editUserProfile(HttpServletRequest request, @Valid @ModelAttribute UserProfileRequest userProfileRequest) throws IOException {
-        profileService.updateUser(userProfileRequest.getEmail(), userProfileRequest.getFirstName(), userProfileRequest.getLastName(), userProfileRequest.getGender(), userProfileRequest.getPassword(), userProfileRequest.getCountry(), userProfileRequest.getCity(), userProfileRequest.getFile());
+        String emailFromToken=tokenUtils.getEmailFromRequest(request);
+        profileService.updateUser(emailFromToken, userProfileRequest.getEmail(), userProfileRequest.getFirstName(), userProfileRequest.getLastName(), userProfileRequest.getGender(), userProfileRequest.getPassword(), userProfileRequest.getCountry(), userProfileRequest.getCity(), userProfileRequest.getFile());
 
         ApiResponse<Void> apiResponse = ApiResponse.<Void>builder().status(HttpStatus.OK.value()).message("Profile updated successfully").build();
 

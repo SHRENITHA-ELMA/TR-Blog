@@ -2,6 +2,7 @@ package com.epam.user.management.application.serviceImpl;
 
 import com.epam.user.management.application.dto.UserResponse;
 import com.epam.user.management.application.entity.User;
+import com.epam.user.management.application.exception.EmailMismatchException;
 import com.epam.user.management.application.exception.UnauthorizedAccessException;
 import com.epam.user.management.application.exception.UserNotFoundException;
 import com.epam.user.management.application.repository.UserRepository;
@@ -61,11 +62,14 @@ public class ProfileServiceImpl implements ProfileService {
         }
     }
     @Override
-    public void updateUser(String email, String firstName, String lastName, String gender, String password, String country, String city, MultipartFile file) throws IOException {
+    public void updateUser(String emailFromToken,String email, String firstName, String lastName, String gender, String password, String country, String city, MultipartFile file) throws IOException {
         if (password != null && !password.isEmpty() && !isPasswordValid(password)) {
             throw new IllegalArgumentException("Password does not meet the required criteria.");
         }
-
+        if(!emailFromToken.equals(email))
+        {
+            throw new EmailMismatchException("Email doesn't match");
+        }
         String filePath = "";
         if (file != null && !file.isEmpty()) {
             filePath = fileStorageService.storeFile(file);

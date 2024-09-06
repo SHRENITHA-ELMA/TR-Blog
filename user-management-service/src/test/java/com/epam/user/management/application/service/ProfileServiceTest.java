@@ -2,10 +2,12 @@ package com.epam.user.management.application.service;
 
 import com.epam.user.management.application.dto.UserResponse;
 import com.epam.user.management.application.entity.User;
+import com.epam.user.management.application.exception.EmailMismatchException;
 import com.epam.user.management.application.exception.UserNotFoundException;
 import com.epam.user.management.application.repository.UserRepository;
 import com.epam.user.management.application.serviceImpl.ProfileServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -21,7 +23,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
+@RequiredArgsConstructor
 public class ProfileServiceTest {
 
     @InjectMocks
@@ -76,70 +78,110 @@ void testGetProfileByUsers_UserFound() {
         verify(userRepository).findByEmail(email);
     }
 
-
     @Test
-    void testUpdateUser_Success() throws IOException {
+    void testUpdateUserSuccessfully() throws IOException {
         String email = "test@example.com";
+        String emailFromToken = "test@example.com";
+        String firstName = "John";
+        String lastName = "Doe";
+        String gender = "Male";
+        String password = "Password123!";
+        String country = "USA";
+        String city = "New York";
         MultipartFile file = mock(MultipartFile.class);
-        when(file.getInputStream()).thenReturn(new ByteArrayInputStream("test".getBytes()));
-        when(fileStorageService.storeFile(file)).thenReturn("file-path");
+        User existingUser = User.builder()
+            .id(1L)
+            .firstName("John")  // Add other required fields if necessary
+            .lastName("Doe")    // Add other required fields if necessary
+            .email(email)
+            .password("oldPassword")
+            .imageUrl("oldImageUrl")
+            .createdAt(new Date())
+            .isEnabled(true)
+            .role("ROLE_USER")
+            .gender("Male")  // Add other required fields if necessary
+            .country("USA")  // Add other required fields if necessary
+            .city("New York") // Add other required fields if necessary
+            .build();
 
-        User user = new User();
-        user.setId(1L);
-        user.setEmail(email);
-        user.setRole("User");
-        user.setEnabled(true);
-        user.setCreatedAt(new Date());
 
-        when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
-        when(passwordEncoder.encode("Admin@1234")).thenReturn("encoded-password");
+        when(userRepository.findByEmail(email)).thenReturn(Optional.of(existingUser));
+        when(fileStorageService.storeFile(file)).thenReturn("newImageUrl");
+        when(passwordEncoder.encode(password)).thenReturn("encodedPassword");
 
-        UserResponse userResponse = new UserResponse();
-        userResponse.setFirstName("John");
-        userResponse.setLastName("Doe");
-        userResponse.setEmail(email);
-        userResponse.setGender("Male");
-        userResponse.setCity("City");
-        userResponse.setCountry("Country");
-        userResponse.setImageUrl("file-path");
+        profileService.updateUser(emailFromToken, email, firstName, lastName, gender, password, country, city, file);
 
-        profileService.updateUser(email, "John", "Doe", "Male", "Admin@1234", "Country", "City", file);
-
-        verify(userRepository, times(1)).save(any(User.class));
+        verify(userRepository).save(argThat(user -> user.getFirstName().equals(firstName)
+            && user.getLastName().equals(lastName)
+            && user.getPassword().equals("encodedPassword")
+            && user.getImageUrl().equals("newImageUrl")));
     }
 
     @Test
-    void testUpdateUser_UserNotFound() throws IOException {
-        // Arrange
-        String email = "test@example.com";
-        MultipartFile file = mock(MultipartFile.class);
-        when(fileStorageService.storeFile(file)).thenReturn("uploads/test.png");
+    void testPasswordInvalid() {
+        String invalidPassword = "123";
 
-        // Simulate user not found
-        when(userRepository.findByEmail(email)).thenReturn(Optional.empty());
-
-        // Act & Assert
-        UserNotFoundException thrown = assertThrows(UserNotFoundException.class, () -> {
-            profileService.updateUser(email, "John", "Doe", "Male", "Admin@1234", "Country", "City", file);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            profileService.updateUser("test@example.com", "test@example.com", "John", "Doe", "Male", invalidPassword, "USA", "New York", null);
         });
 
-        // Assert
-        assertEquals("User not found with email: " + email, thrown.getMessage());
+        assertEquals("Password does not meet the required criteria.", exception.getMessage());
         verify(userRepository, never()).save(any(User.class));
     }
 
     @Test
-    public void testUpdateUser_PasswordInvalid() {
-        // Arrange
-        String email = "user@example.com";
-        String password = "invalid";
-        MultipartFile file = mock(MultipartFile.class);
+    void testEmailMismatch() {
+        String emailFromToken = "token@example.com";
+        String email = "test@example.com";
 
-        // Act & Assert
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-                profileService.updateUser(email, "John", "Doe", "Male", password, "Country", "City", file)
-        );
-        assertEquals("Password does not meet the required criteria.", exception.getMessage());
+        EmailMismatchException exception = assertThrows(EmailMismatchException.class, () -> {
+            profileService.updateUser(emailFromToken, email, "John", "Doe", "Male", "Password123!", "USA", "New York", null);
+        });
+
+        assertEquals("Email doesn't match", exception.getMessage());
+        verify(userRepository, never()).save(any(User.class));
+    }
+
+    @Test
+    void testUserNotFound() {
+        String email = "test@example.com";
+
+        when(userRepository.findByEmail(email)).thenReturn(Optional.empty());
+
+        UserNotFoundException exception = assertThrows(UserNotFoundException.class, () -> {
+            profileService.updateUser(email, email, "John", "Doe", "Male", "Password123!", "USA", "New York", null);
+        });
+
+        assertEquals("User not found with email: " + email, exception.getMessage());
+        verify(userRepository, never()).save(any(User.class));
+    }
+
+    @Test
+    void testUpdateWithOnlyMandatoryFields() throws IOException {
+        String email = "test@example.com";
+        User existingUser = User.builder()
+                .id(1L)
+                .firstName("John")  // Add other required fields if necessary
+                .lastName("Doe")    // Add other required fields if necessary
+                .email(email)
+                .password("oldPassword")
+                .imageUrl("oldImageUrl")
+                .createdAt(new Date())
+                .isEnabled(true)
+                .role("ROLE_USER")
+                .gender("Male")  // Add other required fields if necessary
+                .country("USA")  // Add other required fields if necessary
+                .city("New York") // Add other required fields if necessary
+                .build();
+
+        when(userRepository.findByEmail(email)).thenReturn(Optional.of(existingUser));
+
+        profileService.updateUser(email, email, "John", "Doe", "Male", null, "USA", "New York", null);
+
+        verify(userRepository).save(argThat(user -> user.getFirstName().equals("John")
+                && user.getLastName().equals("Doe")
+                && user.getCity().equals("New York")
+                && user.getCountry().equals("USA")));
     }
 
 }
