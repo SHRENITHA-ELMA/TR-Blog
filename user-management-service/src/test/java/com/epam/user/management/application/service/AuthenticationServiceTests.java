@@ -1,10 +1,10 @@
-package com.epam.user.management.application;
+package com.epam.user.management.application.service;
 
 import com.epam.user.management.application.dto.RegisterRequest;
 import com.epam.user.management.application.entity.User;
+import com.epam.user.management.application.exception.UserAlreadyExistsException;
 import com.epam.user.management.application.repository.UserRepository;
-import com.epam.user.management.application.service.AuthenticationServiceImpl;
-import com.epam.user.management.application.service.JwtService;
+import com.epam.user.management.application.serviceImpl.AuthenticationServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -45,50 +45,45 @@ class AuthenticationServiceTest {
     }
 
     @Test
-    void testRegisterUserAlreadyExists() {
-        // Arrange
-        RegisterRequest registerRequest = new RegisterRequest();
-        registerRequest = RegisterRequest.builder()
-                .firstName("John")
-                .lastName("Doe")
-                .email("johndoe@example.com")
-                .password("password123")
-                .gender("Male")
-                .country("USA")
-                .city("New York")
-                .build();
-        when(userRepository.findByEmail(registerRequest.getEmail())).thenReturn(Optional.of(new User()));
+    public void testRegister_Success() {
+        RegisterRequest request = new RegisterRequest();
+        request.setFirstName("John");
+        request.setLastName("Doe");
+        request.setEmail("johndoe@example.com");
+        request.setPassword("password");
+        request.setGender("Male");
+        request.setCountry("USA");
+        request.setCity("New York");
 
-        // Act
-        RegisterResponse response = authenticationService.register(registerRequest);
+        // Mock repository findByEmail to return empty
+        when(userRepository.findByEmail(request.getEmail())).thenReturn(Optional.empty());
 
-        // Assert
-        assertEquals("User with email already exists", response.getMessage());
-        verify(userRepository, never()).save(any(User.class));
+        // Mock password encoder
+        when(passwordEncoder.encode(request.getPassword())).thenReturn("encoded_password");
+
+        // Call the service method
+        String response = authenticationService.register(request);
+
+        // Verify repository save was called
+        verify(userRepository, times(1)).save(any(User.class));
+
+        // Assert the success message
+        assertEquals("User registration successful", response);
     }
 
-    @Test
-    void testRegisterUserSuccessfully() {
-        // Arrange
-        RegisterRequest registerRequest = new RegisterRequest();
-        registerRequest = RegisterRequest.builder()
-                .firstName("John")
-                .lastName("Doe")
-                .email("johndoe@example.com")
-                .password("password123")
-                .gender("Male")
-                .country("USA")
-                .city("New York")
-                .build();
-        when(userRepository.findByEmail(registerRequest.getEmail())).thenReturn(Optional.empty());
-        when(passwordEncoder.encode(registerRequest.getPassword())).thenReturn("encodedPassword");
+    @Test(expected = UserAlreadyExistsException.class)
+    public void testRegister_UserAlreadyExists() {
+        RegisterRequest request = new RegisterRequest();
+        request.setFirstName("John");
+        request.setLastName("Doe");
+        request.setEmail("johndoe@example.com");
 
-        // Act
-        RegisterResponse response = authenticationService.register(registerRequest);
+        // Mock repository findByEmail to return a user
+        when(userRepository.findByEmail(request.getEmail()))
+                .thenReturn(Optional.of(new User()));
 
-        // Assert
-        assertEquals("User registration successful", response.getMessage());
-        verify(userRepository).save(any(User.class));
+        // This should throw an exception
+        authenticationService.register(request);
     }
 
     @Test

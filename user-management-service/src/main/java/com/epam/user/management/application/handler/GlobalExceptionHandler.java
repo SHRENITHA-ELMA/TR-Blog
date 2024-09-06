@@ -1,34 +1,37 @@
 package com.epam.user.management.application.handler;
 import com.epam.user.management.application.dto.ApiResponse;
-import com.epam.user.management.application.exception.InvalidTokenException;
-import com.epam.user.management.application.exception.UnauthorizedAccessException;
-import com.epam.user.management.application.exception.UserAlreadyExistsException;
-import com.epam.user.management.application.exception.UserNotFoundException;
+import com.epam.user.management.application.exception.*;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        ApiResponse response=ApiResponse.builder()
-                .message(ex.getMessage())
-                .build();
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(response);
+    @Override
+    public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+        Map<String, String> errors = new HashMap<>();
+        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+            errors.put(error.getField(), error.getDefaultMessage());
+        }
+        return new ResponseEntity<>(
+                ApiResponse.<Map<String, String>>builder()
+                        .status(HttpStatus.BAD_REQUEST.value())
+                        .message("Validation failed")
+                        .data(errors)
+                        .build(),
+                HttpStatus.BAD_REQUEST
+        );
     }
 
 
@@ -40,6 +43,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 null
         );
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+    @ExceptionHandler(UserForbiddenException.class)
+    public ResponseEntity<ApiResponse<Object>> handleUserForbiddenException(Exception ex) {
+        ApiResponse<Object> response = new ApiResponse<>(
+                HttpStatus.FORBIDDEN.value(),
+                ex.getMessage(),
+                null
+        );
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(UserNotFoundException.class)

@@ -1,14 +1,15 @@
-package com.epam.user.management.application.service;
+package com.epam.user.management.application.serviceImpl;
 
 import com.epam.user.management.application.dto.ForgotPasswordResponse;
 import com.epam.user.management.application.dto.ResetPasswordRequest;
 import com.epam.user.management.application.dto.ResetPasswordResponse;
 import com.epam.user.management.application.entity.User;
 import com.epam.user.management.application.repository.UserRepository;
+import com.epam.user.management.application.service.PasswordService;
+import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -17,10 +18,11 @@ public class PasswordServiceImpl implements PasswordService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public PasswordServiceImpl(UserRepository userRepository,PasswordEncoder passwordEncoder){
+    public PasswordServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
+
     private static final String PASSWORD_PATTERN = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,12}$";
 
     private boolean isPasswordValid(String password) {

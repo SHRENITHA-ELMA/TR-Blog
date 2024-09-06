@@ -1,11 +1,10 @@
-package com.epam.user.management.application;
+package com.epam.user.management.application.service;
 
 import com.epam.user.management.application.dto.UserResponse;
 import com.epam.user.management.application.entity.User;
 import com.epam.user.management.application.exception.UserNotFoundException;
 import com.epam.user.management.application.repository.UserRepository;
-import com.epam.user.management.application.service.FileStorageService;
-import com.epam.user.management.application.service.ProfileServiceImpl;
+import com.epam.user.management.application.serviceImpl.ProfileServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

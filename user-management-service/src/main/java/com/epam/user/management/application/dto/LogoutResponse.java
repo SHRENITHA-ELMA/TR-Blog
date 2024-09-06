@@ -9,5 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LogoutResponse {
     private String message;
+    private int status;
 
 }

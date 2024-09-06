@@ -1,10 +1,6 @@
 package com.epam.user.management.application.controller;
 
-import com.epam.user.management.application.dto.ApiResponse;
-import com.epam.user.management.application.dto.ForgotPasswordRequest;
-import com.epam.user.management.application.dto.ForgotPasswordResponse;
-import com.epam.user.management.application.dto.ResetPasswordRequest;
-import com.epam.user.management.application.dto.ResetPasswordResponse;
+import com.epam.user.management.application.dto.*;
 import com.epam.user.management.application.service.PasswordService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -3,11 +3,12 @@ package com.epam.user.management.application.service;
 import com.epam.user.management.application.dto.LogoutResponse;
 import com.epam.user.management.application.dto.RegisterRequest;
 import com.epam.user.management.application.entity.User;
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface AuthenticationService {
-    public User authenticate(String email, String password);
+    User authenticate(String email, String password);
 
-    public String register(RegisterRequest registerRequest);
+    String register(RegisterRequest registerRequest);
 
-    public LogoutResponse logout(String token);
+    public LogoutResponse logout(HttpServletRequest request);
 }

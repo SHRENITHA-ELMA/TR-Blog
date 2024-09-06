@@ -8,8 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ForgotPasswordResponse {
-
     private boolean emailExists;
-
-
 }

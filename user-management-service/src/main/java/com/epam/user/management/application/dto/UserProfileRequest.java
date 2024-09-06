@@ -4,9 +4,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import org.springframework.web.multipart.MultipartFile;
-
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class UserProfileRequest {
@@ -23,7 +22,6 @@ public class UserProfileRequest {
     @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters")
     private String lastName;
 
-    @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
 
     @NotBlank(message = "Gender is required")

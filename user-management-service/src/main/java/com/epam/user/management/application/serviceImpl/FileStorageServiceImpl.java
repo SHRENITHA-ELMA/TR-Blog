@@ -1,9 +1,9 @@
-package com.epam.user.management.application.service;
+package com.epam.user.management.application.serviceImpl;
 
+import com.epam.user.management.application.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +17,7 @@ public class FileStorageServiceImpl implements FileStorageService {
 
     @Value("${file.upload-dir}")
     private String uploadDir;
+
     @Override
     public String storeFile(MultipartFile file) throws IOException {
         if (file.isEmpty()) {
@@ -28,11 +29,13 @@ public class FileStorageServiceImpl implements FileStorageService {
         if (!Files.exists(Path.of(uploadDir))) {
             Files.createDirectories(Path.of(uploadDir));
         }
+
         File destinationFile = new File(uploadDir, uniqueFilename);
 
         Files.copy(file.getInputStream(), Paths.get(destinationFile.getAbsolutePath()));
 
-         String fileUri = (uploadDir+uniqueFilename);
+        String fileUri = (uploadDir + uniqueFilename);
+
         return fileUri;
     }
 }

@@ -1,11 +1,10 @@
-package com.epam.user.management.application;
+package com.epam.user.management.application.service;
 
 import com.epam.user.management.application.dto.ForgotPasswordResponse;
 import com.epam.user.management.application.dto.ResetPasswordRequest;
 import com.epam.user.management.application.dto.ResetPasswordResponse;
 import com.epam.user.management.application.entity.User;
 import com.epam.user.management.application.repository.UserRepository;
-import com.epam.user.management.application.service.PasswordServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -21,7 +20,7 @@ import static org.mockito.Mockito.*;
 class PasswordServiceImplTest {
 
     @InjectMocks
-    private PasswordServiceImpl passwordService;
+    private PasswordService passwordService;
 
     @Mock
     private UserRepository userRepository;

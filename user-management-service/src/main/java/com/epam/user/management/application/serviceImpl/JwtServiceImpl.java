@@ -1,5 +1,6 @@
-package com.epam.user.management.application.service;
+package com.epam.user.management.application.serviceImpl;
 
+import com.epam.user.management.application.service.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -85,6 +86,7 @@ public class JwtServiceImpl implements JwtService {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+
     public void blacklistToken(String token) {
         tokenBlackList.add(token);
     }

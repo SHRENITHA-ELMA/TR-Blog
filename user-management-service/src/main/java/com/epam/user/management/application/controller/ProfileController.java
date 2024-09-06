@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -22,7 +21,7 @@ import java.io.IOException;
 @RequestMapping("/profile")
 @Log
 @RequiredArgsConstructor
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 public class ProfileController {
 
     private final JwtService jwtService;
@@ -37,51 +36,17 @@ public class ProfileController {
 
         UserResponse userResponse = profileService.getProfileByUsers(email);
 
-        ApiResponse<UserResponse> apiResponse = ApiResponse.<UserResponse>builder()
-                .status(HttpStatus.OK.value())
-                .message("User profile retrieved successfully")
-                .data(userResponse)
-                .build();
+        ApiResponse<UserResponse> apiResponse = ApiResponse.<UserResponse>builder().status(HttpStatus.OK.value()).message("User profile retrieved successfully").data(userResponse).build();
         return ResponseEntity.ok(apiResponse);
 
     }
 
+    @PutMapping(value = "/editProfile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ApiResponse<Void>> editUserProfile(HttpServletRequest request, @Valid @ModelAttribute UserProfileRequest userProfileRequest) throws IOException {
+        profileService.updateUser(userProfileRequest.getEmail(), userProfileRequest.getFirstName(), userProfileRequest.getLastName(), userProfileRequest.getGender(), userProfileRequest.getPassword(), userProfileRequest.getCountry(), userProfileRequest.getCity(), userProfileRequest.getFile());
 
-//    @PutMapping(value = "/editProfile",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    public ResponseEntity<ApiResponse<Void>> editUserProfile(HttpServletRequest request, @RequestParam("email") String email,
-//                                                           @RequestParam("firstName") String firstName,
-//                                                           @RequestParam("lastName") String lastName,
-//                                                           @RequestParam("password") String password,
-//                                                           @RequestParam("gender") String gender,
-//                                                           @RequestParam("country") String country,
-//                                                           @RequestParam("city") String city,
-//                                                           @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
-//        profileService.updateUser(email, firstName, lastName, gender, password, country, city, file);
-//        ApiResponse<Void> apiResponse = ApiResponse.<Void>builder()
-//                .status(HttpStatus.OK.value())
-//                .message("Profile updated successfully")
-//                .build();
-//        return ResponseEntity.ok(apiResponse);
-//    }
-@PutMapping(value = "/editProfile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-public ResponseEntity<ApiResponse<Void>> editUserProfile(HttpServletRequest request,
-                                                         @Valid @ModelAttribute UserProfileRequest userProfileRequest) throws IOException {
-    profileService.updateUser(
-            userProfileRequest.getEmail(),
-            userProfileRequest.getFirstName(),
-            userProfileRequest.getLastName(),
-            userProfileRequest.getGender(),
-            userProfileRequest.getPassword(),
-            userProfileRequest.getCountry(),
-            userProfileRequest.getCity(),
-            userProfileRequest.getFile()
-    );
+        ApiResponse<Void> apiResponse = ApiResponse.<Void>builder().status(HttpStatus.OK.value()).message("Profile updated successfully").build();
 
-    ApiResponse<Void> apiResponse = ApiResponse.<Void>builder()
-            .status(HttpStatus.OK.value())
-            .message("Profile updated successfully")
-            .build();
-
-    return ResponseEntity.ok(apiResponse);
-}
+        return ResponseEntity.ok(apiResponse);
+    }
 }

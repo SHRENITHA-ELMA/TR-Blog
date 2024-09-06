@@ -9,8 +9,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class AdditionalResourceWebConfiguration implements WebMvcConfigurer {
     @Value("${file.upload-dir}")
     private String uploadDir;
+
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/uploads/**").addResourceLocations("file:"+uploadDir);
+        registry.addResourceHandler("/uploads/**").addResourceLocations("file:" + uploadDir);
     }
 }
