@@ -61,16 +61,24 @@ class AuthenticationControllerTest {
 	@Test
 	void testAuthenticate_Success() {
 		// Arrange
-		LoginRequest loginRequest =  LoginRequest.builder()
+		LoginRequest loginRequest = LoginRequest.builder()
 				.email("john.doe@example.com")
 				.password("password123")
 				.build();
-		User user = new User();
-		user.setEmail("john.doe@example.com");
-		user.setRole("USER");
-		when(authenticationService.authenticate(loginRequest.getEmail(), loginRequest.getPassword())).thenReturn(user);
-		when(jwtService.generateToken(user)).thenReturn("token");
-		when(jwtService.getExpirationTime()).thenReturn(3600L);
+
+		LoginResponse loginResponse = LoginResponse.builder()
+				.token("token")
+				.expiresIn(3600L)
+				.role("USER")
+				.build();
+
+		ApiResponse<LoginResponse> apiResponse = ApiResponse.<LoginResponse>builder()
+				.status(HttpStatus.OK.value())
+				.message("Login Successful")
+				.data(loginResponse)
+				.build();
+
+		when(authenticationService.authenticate(loginRequest.getEmail(), loginRequest.getPassword())).thenReturn(apiResponse);
 
 		// Act
 		ResponseEntity<ApiResponse<LoginResponse>> response = authenticationController.authenticate(loginRequest);
@@ -83,18 +91,23 @@ class AuthenticationControllerTest {
 		assertEquals("token", response.getBody().getData().getToken());
 		assertEquals(3600L, response.getBody().getData().getExpiresIn());
 		assertEquals("USER", response.getBody().getData().getRole());
+
 		verify(authenticationService, times(1)).authenticate(loginRequest.getEmail(), loginRequest.getPassword());
-		verify(jwtService, times(1)).generateToken(user);
-		verify(jwtService, times(1)).getExpirationTime();
 	}
 
 	@Test
 	void testAuthenticate_Failure() {
 		// Arrange
-		LoginRequest loginRequest =  LoginRequest.builder()
+		LoginRequest loginRequest = LoginRequest.builder()
 				.email("wrong.email@example.com")
 				.password("wrongPassword")
 				.build();
+
+//		ApiResponse<LoginResponse> errorResponse = ApiResponse.<LoginResponse>builder()
+//				.status(HttpStatus.UNAUTHORIZED.value())
+//				.message("Invalid credentials")
+//				.build();
+
 		when(authenticationService.authenticate(loginRequest.getEmail(), loginRequest.getPassword())).thenThrow(new RuntimeException("Invalid credentials"));
 
 		// Act
@@ -104,6 +117,7 @@ class AuthenticationControllerTest {
 		assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
 		assertEquals(401, response.getBody().getStatus());
 		assertEquals("Invalid credentials", response.getBody().getMessage());
+
 		verify(authenticationService, times(1)).authenticate(loginRequest.getEmail(), loginRequest.getPassword());
 	}
 

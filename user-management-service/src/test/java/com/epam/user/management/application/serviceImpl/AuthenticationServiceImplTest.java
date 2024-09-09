@@ -1,5 +1,7 @@
 package com.epam.user.management.application.serviceImpl;
 
+import com.epam.user.management.application.dto.ApiResponse;
+import com.epam.user.management.application.dto.LoginResponse;
 import com.epam.user.management.application.dto.LogoutResponse;
 import com.epam.user.management.application.dto.RegisterRequest;
 import com.epam.user.management.application.entity.User;
@@ -95,25 +97,36 @@ class AuthenticationServiceImplTest {
 
 
     @Test
-    void authenticate_validCredentials_returnsUser() {
+    void authenticate_validCredentials_returnsApiResponse() {
         // Arrange
         String email = "test@example.com";
         String password = "password";
         User user = new User();
         user.setEmail(email);
+        user.setRole("USER");
 
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
                 .thenReturn(mock(UsernamePasswordAuthenticationToken.class));
         when(userRepository.findByEmail(email)).thenReturn(Optional.of(user));
+        when(jwtService.generateToken(user)).thenReturn("token");
+        when(jwtService.getExpirationTime()).thenReturn(3600L);
 
         // Act
-        User result = authenticationService.authenticate(email, password);
+        ApiResponse<LoginResponse> result = authenticationService.authenticate(email, password);
 
         // Assert
         assertNotNull(result);
-        assertEquals(email, result.getEmail());
+        assertEquals(200, result.getStatus());
+        assertEquals("Login Successful", result.getMessage());
+        assertNotNull(result.getData());
+        assertEquals("token", result.getData().getToken());
+        assertEquals(3600L, result.getData().getExpiresIn());
+        assertEquals("USER", result.getData().getRole());
+
         verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
         verify(userRepository).findByEmail(email);
+        verify(jwtService).generateToken(user);
+        verify(jwtService).getExpirationTime();
     }
 
     @Test
@@ -126,9 +139,10 @@ class AuthenticationServiceImplTest {
                 .thenThrow(new BadCredentialsException("Invalid credentials"));
 
         // Act & Assert
-        assertThrows(AuthenticationException.class, () -> authenticationService.authenticate(email, password));
+        assertThrows(RuntimeException.class, () -> authenticationService.authenticate(email, password));
         verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
         verify(userRepository, never()).findByEmail(anyString());
+        verify(jwtService, never()).generateToken(any(User.class));
     }
 
     @Test
@@ -145,6 +159,7 @@ class AuthenticationServiceImplTest {
         assertThrows(RuntimeException.class, () -> authenticationService.authenticate(email, password));
         verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
         verify(userRepository).findByEmail(email);
+        verify(jwtService, never()).generateToken(any(User.class));
     }
 
 

@@ -3,12 +3,14 @@ package com.epam.user.management.application.serviceImpl;
 import com.epam.user.management.application.dto.UserResponse;
 import com.epam.user.management.application.entity.User;
 import com.epam.user.management.application.exception.EmailMismatchException;
+import com.epam.user.management.application.exception.InvalidFileFormatException;
 import com.epam.user.management.application.exception.UnauthorizedAccessException;
 import com.epam.user.management.application.exception.UserNotFoundException;
 import com.epam.user.management.application.repository.UserRepository;
 import com.epam.user.management.application.service.FileStorageService;
 import com.epam.user.management.application.service.ProfileService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ import java.util.regex.Pattern;
 
 @Log
 @Service
+@RequiredArgsConstructor
 public class ProfileServiceImpl implements ProfileService {
 
     private final UserRepository userRepository;
@@ -32,19 +35,24 @@ public class ProfileServiceImpl implements ProfileService {
     private final FileStorageService fileStorageService;
 
     private static final String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,12}$";
-
-
-    public ProfileServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, ObjectMapper objectMapper, FileStorageService fileStorageService) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.objectMapper = objectMapper;
-        this.fileStorageService = fileStorageService;
-    }
+    private static final String[] ALLOWED_CONTENT_TYPES = { "image/jpeg", "image/png","image/jpg" };
 
     private boolean isPasswordValid(String password) {
         return Pattern.matches(PASSWORD_PATTERN, password);
     }
 
+    private boolean isFileTypeValid(MultipartFile file) {
+        if (file == null || file.isEmpty()) {
+            return true; // If the file is not provided, skip validation
+        }
+        String contentType = file.getContentType();
+        for (String allowedContentType : ALLOWED_CONTENT_TYPES) {
+            if (allowedContentType.equals(contentType)) {
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public UserResponse getProfileByUsers(String email) {
         Optional<User> user = userRepository.findByEmail(email);
@@ -69,6 +77,9 @@ public class ProfileServiceImpl implements ProfileService {
         if(!emailFromToken.equals(email))
         {
             throw new EmailMismatchException("Email doesn't match");
+        }
+        if (file != null && !isFileTypeValid(file)) {
+            throw new InvalidFileFormatException("File must be in JPEG,JPG or PNG format");
         }
         String filePath = "";
         if (file != null && !file.isEmpty()) {

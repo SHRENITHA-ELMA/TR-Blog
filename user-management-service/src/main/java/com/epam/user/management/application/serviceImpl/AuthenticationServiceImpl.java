@@ -1,5 +1,7 @@
 package com.epam.user.management.application.serviceImpl;
 
+import com.epam.user.management.application.dto.ApiResponse;
+import com.epam.user.management.application.dto.LoginResponse;
 import com.epam.user.management.application.dto.LogoutResponse;
 import com.epam.user.management.application.dto.RegisterRequest;
 import com.epam.user.management.application.entity.User;
@@ -64,17 +66,29 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 
     @Override
-    public User authenticate(String email, String password) {
+    public ApiResponse<LoginResponse> authenticate(String email, String password) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        email,
-                        password
-                )
+                new UsernamePasswordAuthenticationToken(email, password)
         );
 
-        return userRepository.findByEmail(email)
-                .orElseThrow();
+        User authenticatedUser = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        String jwtToken = jwtService.generateToken(authenticatedUser);
+
+        LoginResponse loginResponse = LoginResponse.builder()
+                .token(jwtToken)
+                .expiresIn(jwtService.getExpirationTime())
+                .role(authenticatedUser.getRole())
+                .build();
+
+        return ApiResponse.<LoginResponse>builder()
+                .status(HttpStatus.OK.value())
+                .message("Login Successful")
+                .data(loginResponse)
+                .build();
     }
+
 
     @Override
     public LogoutResponse logout(HttpServletRequest request) {
