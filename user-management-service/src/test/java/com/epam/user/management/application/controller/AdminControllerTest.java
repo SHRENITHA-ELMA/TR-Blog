@@ -91,6 +91,6 @@ class AdminControllerTest {
         userEditRequest.setEmail("user@example.com");
         userEditRequest.setCountry("New Country");
         adminController.updateUser(userEditRequest, request);
-        verify(adminServiceImpl).updateUser(adminUser.getEmail(), userEditRequest);
+        verify(adminServiceImpl).updateUser(userEditRequest.getEmail(), userEditRequest);
     }
 }
