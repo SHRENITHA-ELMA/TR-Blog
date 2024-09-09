@@ -18,6 +18,14 @@ public class FileStorageServiceImpl implements FileStorageService {
     @Value("${file.upload-dir}")
     private String uploadDir;
 
+    private String getFileExtension(String filename) {
+        int lastDotIndex = filename.lastIndexOf('.');
+        if (lastDotIndex > 0 && lastDotIndex < filename.length() - 1) {
+            return filename.substring(lastDotIndex + 1);
+        }
+        return "";
+    }
+
     @Override
     public String storeFile(MultipartFile file) throws IOException {
         if (file.isEmpty()) {
@@ -25,7 +33,8 @@ public class FileStorageServiceImpl implements FileStorageService {
         }
 
         String originalFilename = file.getOriginalFilename();
-        String uniqueFilename = UUID.randomUUID().toString() + "_" + originalFilename;
+        String fileExtension = getFileExtension(originalFilename);
+        String uniqueFilename = UUID.randomUUID().toString()+ "."+ fileExtension;
         if (!Files.exists(Path.of(uploadDir))) {
             Files.createDirectories(Path.of(uploadDir));
         }

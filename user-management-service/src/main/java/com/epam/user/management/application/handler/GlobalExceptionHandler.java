@@ -34,6 +34,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         );
     }
 
+    @ExceptionHandler(InvalidFileFormatException.class)
+    public ResponseEntity<ApiResponse<Void>> handleInvalidFileFormatException(InvalidFileFormatException ex) {
+        ApiResponse<Void> apiResponse = ApiResponse.<Void>builder()
+                .status(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value())
+                .message(ex.getMessage())
+                .build();
+        return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<ApiResponse<Object>> handleUserAlreadyExistException(Exception ex) {
