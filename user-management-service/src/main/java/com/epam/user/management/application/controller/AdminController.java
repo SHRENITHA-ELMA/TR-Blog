@@ -64,7 +64,7 @@ public class AdminController {
                                                           HttpServletRequest request) {
         ensureAdminAccess(request);
         User currentUser = tokenUtils.getUserFromRequest(request).orElseThrow(); // Assumes admin access is ensured
-        String response = adminServiceImpl.updateUser(currentUser.getEmail(), userEditRequest);
+        String response = adminServiceImpl.updateUser(userEditRequest.getEmail(), userEditRequest);
         return ResponseEntity.ok(ApiResponse.builder()
                 .status(HttpStatus.OK.value())
                 .message(response)
