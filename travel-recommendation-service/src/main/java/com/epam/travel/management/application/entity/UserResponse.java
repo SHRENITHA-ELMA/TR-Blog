@@ -1,4 +1,4 @@
-package com.epam.user.management.application.dto;
+package com.epam.travel.management.application.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,14 +12,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @Component
 public class UserResponse {
-    private Long id;
     private String imageUrl;
-    private String email;
     private String firstName;
     private String lastName;
-    private String gender;
-    private String country;
-    private String city;
-    private boolean isEnabled;
-
 }

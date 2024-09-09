@@ -1,0 +1,102 @@
+Index: user-management-service/src/main/java/com/epam/user/management/application/controller/AuthenticationController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.epam.user.management.application.controller;\r\n\r\nimport com.epam.user.management.application.dto.LoginRequest;\r\nimport com.epam.user.management.application.dto.LoginResponse;\r\nimport com.epam.user.management.application.dto.RegisterRequest;\r\nimport com.epam.user.management.application.dto.RegisterResponse;\r\nimport com.epam.user.management.application.entity.User;\r\nimport com.epam.user.management.application.service.AuthenticationService;\r\nimport com.epam.user.management.application.service.AuthenticationServiceImpl;\r\nimport com.epam.user.management.application.service.JwtService;\r\nimport com.epam.user.management.application.service.JwtServiceImpl;\r\nimport org.springframework.http.MediaType;\r\nimport com.epam.user.management.application.entity.User;\r\nimport com.epam.user.management.application.service.AuthenticationServiceImpl;\r\nimport com.epam.user.management.application.service.JwtServiceImpl;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.web.bind.annotation.PostMapping;\r\nimport org.springframework.web.bind.annotation.RequestBody;\r\nimport org.springframework.web.bind.annotation.RequestMapping;\r\nimport org.springframework.web.bind.annotation.RestController;\r\n\r\n@RequestMapping(\"/auth\")\r\n@RestController\r\npublic class AuthenticationController {\r\n    private final JwtServiceImpl jwtService;\r\n\r\n    private final AuthenticationServiceImpl authenticationService;\r\n\r\n    public AuthenticationController(JwtServiceImpl jwtService, AuthenticationServiceImpl authenticationService) {\r\n        this.jwtService = jwtService;\r\n        this.authenticationService = authenticationService;\r\n    }\r\n\r\n    @PostMapping(value = \"/register\", produces = MediaType.APPLICATION_JSON_VALUE)\r\n    public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest registerRequest) {\r\n\r\n        RegisterResponse registerResponse = authenticationService.register(registerRequest);\r\n\r\n        return ResponseEntity.ok(registerResponse);\r\n    }\r\n    @PostMapping(\"/login\")\r\n    public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginRequest loginRequest) {\r\n        User authenticatedUser;\r\n        try {\r\n            authenticatedUser = authenticationService.authenticate(loginRequest.getEmail(), loginRequest.getPassword());\r\n        } catch (Exception e) {\r\n            LoginResponse loginResponse = LoginResponse.builder().message(e.getMessage()).build();\r\n            return ResponseEntity.ok(loginResponse);\r\n        }\r\n\r\n        String jwtToken = jwtService.generateToken(authenticatedUser);\r\n\r\n        LoginResponse loginResponse = LoginResponse.builder()\r\n                .token(jwtToken).expiresIn(jwtService.getExpirationTime()).message(\"Login Successful\").role(authenticatedUser.getRole())\r\n                .build();\r\n\r\n        return ResponseEntity.ok(loginResponse);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/user-management-service/src/main/java/com/epam/user/management/application/controller/AuthenticationController.java b/user-management-service/src/main/java/com/epam/user/management/application/controller/AuthenticationController.java
+--- a/user-management-service/src/main/java/com/epam/user/management/application/controller/AuthenticationController.java	(revision 00f38ae88a34236b905456314a441401e419a361)
++++ b/user-management-service/src/main/java/com/epam/user/management/application/controller/AuthenticationController.java	(date 1725877703864)
+@@ -1,18 +1,13 @@
+ package com.epam.user.management.application.controller;
+ 
+-import com.epam.user.management.application.dto.LoginRequest;
+-import com.epam.user.management.application.dto.LoginResponse;
+-import com.epam.user.management.application.dto.RegisterRequest;
+-import com.epam.user.management.application.dto.RegisterResponse;
++import com.epam.user.management.application.dto.*;
+ import com.epam.user.management.application.entity.User;
+ import com.epam.user.management.application.service.AuthenticationService;
+-import com.epam.user.management.application.service.AuthenticationServiceImpl;
+ import com.epam.user.management.application.service.JwtService;
+-import com.epam.user.management.application.service.JwtServiceImpl;
+-import org.springframework.http.MediaType;
+-import com.epam.user.management.application.entity.User;
+-import com.epam.user.management.application.service.AuthenticationServiceImpl;
+-import com.epam.user.management.application.service.JwtServiceImpl;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.validation.Valid;
++import lombok.RequiredArgsConstructor;
++import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
+ import org.springframework.web.bind.annotation.PostMapping;
+ import org.springframework.web.bind.annotation.RequestBody;
+@@ -21,39 +16,41 @@
+ 
+ @RequestMapping("/auth")
+ @RestController
++@RequiredArgsConstructor
+ public class AuthenticationController {
+-    private final JwtServiceImpl jwtService;
+-
+-    private final AuthenticationServiceImpl authenticationService;
+-
+-    public AuthenticationController(JwtServiceImpl jwtService, AuthenticationServiceImpl authenticationService) {
+-        this.jwtService = jwtService;
+-        this.authenticationService = authenticationService;
+-    }
+ 
+-    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
+-    public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest registerRequest) {
++    private final AuthenticationService authenticationService;
+ 
+-        RegisterResponse registerResponse = authenticationService.register(registerRequest);
+ 
+-        return ResponseEntity.ok(registerResponse);
++    @PostMapping(value = "/register")
++    public ResponseEntity<ApiResponse<Object>> register(@Valid @RequestBody RegisterRequest registerRequest) {
++        String message = authenticationService.register(registerRequest);
++        ApiResponse<Object> apiResponse = ApiResponse.builder().status(HttpStatus.OK.value()).message(message).build();
++        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+     }
++
+     @PostMapping("/login")
+-    public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginRequest loginRequest) {
+-        User authenticatedUser;
++    public ResponseEntity<ApiResponse<LoginResponse>> authenticate(@Valid @RequestBody LoginRequest loginRequest) {
+         try {
+-            authenticatedUser = authenticationService.authenticate(loginRequest.getEmail(), loginRequest.getPassword());
++            ApiResponse<LoginResponse> response = authenticationService.authenticate(loginRequest.getEmail(), loginRequest.getPassword());
++            return new ResponseEntity<>(response, HttpStatus.OK);
+         } catch (Exception e) {
+-            LoginResponse loginResponse = LoginResponse.builder().message(e.getMessage()).build();
+-            return ResponseEntity.ok(loginResponse);
+-        }
+-
+-        String jwtToken = jwtService.generateToken(authenticatedUser);
+-
+-        LoginResponse loginResponse = LoginResponse.builder()
+-                .token(jwtToken).expiresIn(jwtService.getExpirationTime()).message("Login Successful").role(authenticatedUser.getRole())
+-                .build();
++            ApiResponse<LoginResponse> errorResponse = ApiResponse.<LoginResponse>builder()
++                    .status(HttpStatus.UNAUTHORIZED.value())
++                    .message(e.getMessage())
++                    .build();
++            return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
++        }
++    }
+ 
+-        return ResponseEntity.ok(loginResponse);
++
++    @PostMapping("/logout")
++    public ResponseEntity<ApiResponse<LogoutResponse>> logout(HttpServletRequest request) {
++        LogoutResponse logoutResponse = authenticationService.logout(request);
++        ApiResponse<LogoutResponse> apiResponse = ApiResponse.<LogoutResponse>builder()
++                .status(logoutResponse.getStatus())
++                .message(logoutResponse.getMessage())
++                .build();
++        return ResponseEntity.status(logoutResponse.getStatus()).body(apiResponse);
+     }
+ }
+\ No newline at end of file
