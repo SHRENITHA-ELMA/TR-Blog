@@ -1,11 +1,11 @@
-package com.epam.user.management.application.service;
+package com.epam.user.management.application.serviceImpl;
 
 import com.epam.user.management.application.dto.UserResponse;
 import com.epam.user.management.application.entity.User;
 import com.epam.user.management.application.exception.EmailMismatchException;
 import com.epam.user.management.application.exception.UserNotFoundException;
 import com.epam.user.management.application.repository.UserRepository;
-import com.epam.user.management.application.serviceImpl.ProfileServiceImpl;
+import com.epam.user.management.application.service.FileStorageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +16,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Optional;
@@ -24,7 +23,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 @RequiredArgsConstructor
-public class ProfileServiceTest {
+public class ProfileServiceImplTest {
 
     @InjectMocks
     private ProfileServiceImpl profileService;

@@ -12,13 +12,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
     public List<UserResponse> getAllUsers() {
         try {
             List<User> users = userRepository.findByRole("User");
@@ -41,8 +39,6 @@ public class AdminServiceImpl implements AdminService {
                     .toList();
         } catch (UserNotFoundException e) {
             throw e;
-        } catch (Exception e) {
-            throw new RuntimeException("Unhandled exception occurred while fetching users", e);
         }
     }
     public Optional<User> getUserById(Long id) {
@@ -51,34 +47,21 @@ public class AdminServiceImpl implements AdminService {
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-    public ApiResponse<Object> setUserEnabledStatus(String email, UserEnableDisableRequest userEnableDisableRequest) {
-        try {
-
-            Optional<User> currentUser = getUserByEmail(email);
-            Optional<User> userOptional = userRepository.findById(userEnableDisableRequest.getId());
-
-
-            if (userOptional.isPresent()) {
-                if (currentUser.isPresent() && "Admin".equals(currentUser.get().getRole())) {
-                    User user = userOptional.get();
-                    user.setEnabled(userEnableDisableRequest.getEnable());
-                    userRepository.save(user);
-                    String action = userEnableDisableRequest.getEnable() ? "enabled" : "disabled";
-                    ApiResponse<Object> response = new ApiResponse<>();
-                    response.setStatus(HttpStatus.OK.value());
-                    response.setMessage("User " + action + " successfully");
-                    return response;
-                } else {
-                    throw new AuthorizationException("You are not authorized to perform this action.");
-                }
-            } else {
-                throw new UserNotFoundException("User not found for ID: " + userEnableDisableRequest.getId());
-            }
-        } catch (UserNotFoundException | AuthorizationException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to update user status", e);
+    public ApiResponse<Object> setUserEnabledStatus(String email, UserEnableDisableRequest request) {
+        User requestingUser = getUserByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("Current user not found."));
+        User targetUser = userRepository.findById(request.getId())
+                .orElseThrow(() -> new UserNotFoundException("User not found for ID: " + request.getId()));
+        if (!"Admin".equals(requestingUser.getRole())) {
+            throw new AuthorizationException("You are not authorized to perform this action.");
         }
+        targetUser.setEnabled(request.getEnable());
+        userRepository.save(targetUser);
+        String action = Boolean.TRUE.equals(request.getEnable()) ? "enabled" : "disabled";
+        ApiResponse<Object> response = new ApiResponse<>();
+        response.setStatus(HttpStatus.OK.value());
+        response.setMessage("User " + action + " successfully");
+        return response;
     }
     public String create(UserCreateRequest userCreateRequest) {
         try {
@@ -86,7 +69,6 @@ public class AdminServiceImpl implements AdminService {
             if (user.isPresent()) {
                 throw new UserAlreadyExistsException("User with email already exists.");
             }
-
             User newUser = User.builder()
                     .firstName(userCreateRequest.getFirstName())
                     .lastName(userCreateRequest.getLastName())
@@ -102,8 +84,6 @@ public class AdminServiceImpl implements AdminService {
             return "User Created successfully";
         } catch (UserAlreadyExistsException e) {
             throw e;
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to create user", e);
         }
     }
     public String updateUser(String targetUserEmail, UserEditRequest userEditRequest) {
@@ -127,8 +107,6 @@ public class AdminServiceImpl implements AdminService {
             }
         } catch (IllegalArgumentException | UserNotFoundException e) {
             throw e;
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to update user", e);
         }
     }
 }

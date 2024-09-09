@@ -2,15 +2,14 @@ package com.epam.user.management.application.dto;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-public class UserEditRequestTest {
+class UserEditRequestTest {
     private UserEditRequest userEditRequest;
     @BeforeEach
     public void setUp() {
         userEditRequest = new UserEditRequest();
     }
     @Test
-    public void testSettersAndGetters() {
-        // Act: Set values using setters
+    void testSettersAndGetters() {
         userEditRequest.setFirstName("Alice");
         userEditRequest.setLastName("Johnson");
         userEditRequest.setEmail("alice.johnson@example.com");
@@ -27,7 +26,7 @@ public class UserEditRequestTest {
         assertEquals("London", userEditRequest.getCity());
     }
     @Test
-    public void testNullValues() {
+    void testNullValues() {
         assertNull(userEditRequest.getFirstName());
         assertNull(userEditRequest.getLastName());
         assertNull(userEditRequest.getEmail());
@@ -37,7 +36,7 @@ public class UserEditRequestTest {
         assertNull(userEditRequest.getCity());
     }
     @Test
-    public void testFieldUpdates() {
+    void testFieldUpdates() {
         userEditRequest.setFirstName("Bob");
         userEditRequest.setLastName("Smith");
         userEditRequest.setEmail("bob.smith@example.com");

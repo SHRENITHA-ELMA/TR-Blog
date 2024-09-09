@@ -1,15 +1,18 @@
-package com.epam.user.management.application.service;
+package com.epam.user.management.application.serviceImpl;
 
+import com.epam.user.management.application.dto.LogoutResponse;
 import com.epam.user.management.application.dto.RegisterRequest;
 import com.epam.user.management.application.entity.User;
 import com.epam.user.management.application.exception.UserAlreadyExistsException;
 import com.epam.user.management.application.repository.UserRepository;
-import com.epam.user.management.application.serviceImpl.AuthenticationServiceImpl;
+import com.epam.user.management.application.service.JwtService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class AuthenticationServiceTest {
+class AuthenticationServiceImplTest {
 
     @Mock
     private UserRepository userRepository;
@@ -37,10 +40,11 @@ class AuthenticationServiceTest {
     private AuthenticationServiceImpl authenticationService;
     @Mock
     private JwtService jwtService;
+    @Mock
+    private HttpServletRequest request;
 
     @BeforeEach
-    void setUp()
-    {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
@@ -71,7 +75,8 @@ class AuthenticationServiceTest {
         assertEquals("User registration successful", response);
     }
 
-//    @Test(expected = UserAlreadyExistsException.class)
+
+    @Test
     public void testRegister_UserAlreadyExists() {
         RegisterRequest request = new RegisterRequest();
         request.setFirstName("John");
@@ -82,9 +87,12 @@ class AuthenticationServiceTest {
         when(userRepository.findByEmail(request.getEmail()))
                 .thenReturn(Optional.of(new User()));
 
-        // This should throw an exception
-        authenticationService.register(request);
+        // Use assertThrows to verify the exception
+        assertThrows(UserAlreadyExistsException.class, () -> {
+            authenticationService.register(request);
+        });
     }
+
 
     @Test
     void authenticate_validCredentials_returnsUser() {
@@ -141,11 +149,50 @@ class AuthenticationServiceTest {
 
 
     @Test
-    void testIsTokenBlacklisted_False() {
+    void testLogout_Success() {
         String token = "sampleToken";
+        when(request.getHeader("Authorization")).thenReturn("Bearer " + token);
+        doNothing().when(jwtService).blacklistToken(token);
 
-        // Verify that a token not in the blacklist returns false
-        assertFalse(jwtService.isTokenBlacklisted(token));
+        LogoutResponse response = authenticationService.logout(request);
+
+        assertEquals("Logout successful", response.getMessage());
+        assertEquals(HttpStatus.OK.value(), response.getStatus());
+        verify(jwtService, times(1)).blacklistToken(token);
+    }
+
+    @Test
+    void testLogout_NoAuthorizationHeader() {
+        when(request.getHeader("Authorization")).thenReturn(null);
+
+        LogoutResponse response = authenticationService.logout(request);
+
+        assertEquals("User is unauthorized", response.getMessage());
+        assertEquals(HttpStatus.UNAUTHORIZED.value(), response.getStatus());
+        verify(jwtService, never()).blacklistToken(anyString());
+    }
+
+    @Test
+    void testLogout_InvalidTokenFormat() {
+        when(request.getHeader("Authorization")).thenReturn("InvalidToken");
+
+        LogoutResponse response = authenticationService.logout(request);
+
+        assertEquals("User is unauthorized", response.getMessage());
+        assertEquals(HttpStatus.UNAUTHORIZED.value(), response.getStatus());
+        verify(jwtService, never()).blacklistToken(anyString());
+    }
+
+    @Test
+    void testLogout_BlacklistTokenThrowsException() {
+        String token = "sampleToken";
+        when(request.getHeader("Authorization")).thenReturn("Bearer " + token);
+        doThrow(new RuntimeException("Token blacklist failed")).when(jwtService).blacklistToken(token);
+
+        LogoutResponse response = authenticationService.logout(request);
+
+        assertEquals("Logout failed: Token blacklist failed", response.getMessage());
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
     }
 }
 

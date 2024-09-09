@@ -1,5 +1,4 @@
 package com.epam.user.management.application.controller;
-
 import com.epam.user.management.application.dto.*;
 import com.epam.user.management.application.entity.User;
 import com.epam.user.management.application.exception.UserForbiddenException;
@@ -13,28 +12,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/admin")
 @Validated
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class AdminController {
-
     private final AdminServiceImpl adminServiceImpl;
     private final TokenUtils tokenUtils;
-
-    private void ensureAdminAccess(HttpServletRequest request) {
+    public void ensureAdminAccess(HttpServletRequest request) {
         Optional<User> currentUserOpt = tokenUtils.getUserFromRequest(request);
         if (currentUserOpt.isPresent() && !Objects.equals(currentUserOpt.get().getRole(), "Admin")) {
             throw new UserForbiddenException("You are not authorized for this action");
         }
     }
-
     @GetMapping("/users")
     public ResponseEntity<ApiResponse<List<UserResponse>>> getAllUsers(HttpServletRequest request) {
         ensureAdminAccess(request);
@@ -55,7 +49,7 @@ public class AdminController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/users/create")
+    @PostMapping("/users")
     public ResponseEntity<ApiResponse<Object>> createUser(@Valid @RequestBody UserCreateRequest userCreateRequest,
                                                           HttpServletRequest request) {
         ensureAdminAccess(request);
@@ -65,8 +59,7 @@ public class AdminController {
                 .message(response)
                 .build());
     }
-
-    @PutMapping("/users/update")
+    @PutMapping("/users")
     public ResponseEntity<ApiResponse<Object>> updateUser(@Valid @RequestBody UserEditRequest userEditRequest,
                                                           HttpServletRequest request) {
         ensureAdminAccess(request);

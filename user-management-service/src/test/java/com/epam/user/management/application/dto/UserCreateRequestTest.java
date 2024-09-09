@@ -1,9 +1,9 @@
 package com.epam.user.management.application.dto;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-public class UserCreateRequestTest {
+class UserCreateRequestTest {
     @Test
-    public void testGetterAndSetter() {
+    void testGetterAndSetter() {
         UserCreateRequest userCreateRequest = new UserCreateRequest();
         userCreateRequest.setFirstName("John");
         userCreateRequest.setLastName("Doe");
@@ -23,7 +23,7 @@ public class UserCreateRequestTest {
         assertEquals("New York", userCreateRequest.getCity());
     }
     @Test
-    public void testEmptyObjectInitialization() {
+    void testEmptyObjectInitialization() {
         UserCreateRequest userCreateRequest = new UserCreateRequest();
         assertNull(userCreateRequest.getFirstName());
         assertNull(userCreateRequest.getLastName());
