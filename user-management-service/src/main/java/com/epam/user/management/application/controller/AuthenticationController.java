@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class AuthenticationController {
-    private final JwtService jwtService;
+
     private final AuthenticationService authenticationService;
 
 
@@ -31,22 +31,18 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<LoginResponse>> authenticate(@Valid @RequestBody LoginRequest loginRequest) {
-        User authenticatedUser;
         try {
-            authenticatedUser = authenticationService.authenticate(loginRequest.getEmail(), loginRequest.getPassword());
+            ApiResponse<LoginResponse> response = authenticationService.authenticate(loginRequest.getEmail(), loginRequest.getPassword());
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-
-            return new ResponseEntity<>(ApiResponse.<LoginResponse>builder().status(HttpStatus.UNAUTHORIZED.value()).message(e.getMessage()).build(), HttpStatus.UNAUTHORIZED);
+            ApiResponse<LoginResponse> errorResponse = ApiResponse.<LoginResponse>builder()
+                    .status(HttpStatus.UNAUTHORIZED.value())
+                    .message(e.getMessage())
+                    .build();
+            return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
         }
-
-        String jwtToken = jwtService.generateToken(authenticatedUser);
-
-        LoginResponse loginResponse = LoginResponse.builder()
-                .token(jwtToken).expiresIn(jwtService.getExpirationTime()).role(authenticatedUser.getRole())
-                .build();
-
-        return new ResponseEntity<>(ApiResponse.<LoginResponse>builder().status(HttpStatus.OK.value()).message("Login Successful").data(loginResponse).build(), HttpStatus.OK);
     }
+
 
     @PostMapping("/logout")
     public ResponseEntity<ApiResponse<LogoutResponse>> logout(HttpServletRequest request) {
