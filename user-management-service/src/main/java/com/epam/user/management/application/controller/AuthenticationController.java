@@ -43,7 +43,6 @@ public class AuthenticationController {
         }
     }
 
-
     @PostMapping("/logout")
     public ResponseEntity<ApiResponse<LogoutResponse>> logout(HttpServletRequest request) {
         LogoutResponse logoutResponse = authenticationService.logout(request);

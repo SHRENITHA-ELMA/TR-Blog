@@ -89,7 +89,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .build();
     }
 
-
     @Override
     public LogoutResponse logout(HttpServletRequest request) {
         try {

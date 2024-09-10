@@ -2,9 +2,11 @@ package com.epam.travel.management.application.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import lombok.Data;
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
+@Builder
 @Data
 public class BlogRequest {
 
@@ -16,13 +18,14 @@ public class BlogRequest {
     @Size(min = 20, message = "Content must be at least 20 characters long")
     private String content;
 
-    private List<String> images;
+    private MultipartFile image;
 
-    @NotBlank(message = "City is mandatory")
-    @Size(max = 50, message = "City must be less than or equal to 50 characters")
-    private String city;
+    @NotBlank(message = "RegionId is mandatory")
+    private String regionId;
 
-    @NotBlank(message = "Country is mandatory")
-    @Size(max = 50, message = "Country must be less than or equal to 50 characters")
-    private String country;
+    @NotBlank(message = "CategoryId is mandatory")
+    private String categoryId;
+
+    @NotBlank(message = "CountryId is mandatory")
+    private String countryId;
 }

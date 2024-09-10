@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -30,8 +28,8 @@ public class Blog {
     @Lob
     private String content;
 
-    @ElementCollection
-    private List<String> images;
+    @Column(nullable = true)
+    private String imageUrl;
 
     @Column(nullable = false)
     private String status;
@@ -43,21 +41,18 @@ public class Blog {
     private Date updatedAt;
 
     @Column(nullable = false)
-    private double rating;
-
-    @Column(nullable = false)
     private String userName;
 
     @Column(nullable = true)
     private String userProfileImage;
 
     @Column(nullable = false)
-    private String city;
+    private String regionId;
 
     @Column(nullable = false)
-    private String country;
+    private String categoryId;
 
-    @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Review> reviews;
+    @Column(nullable = false)
+    private String countryId;
 }
 
