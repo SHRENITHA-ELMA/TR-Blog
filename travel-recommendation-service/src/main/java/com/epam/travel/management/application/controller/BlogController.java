@@ -40,9 +40,8 @@ public class BlogController {
             @RequestParam(required = false) String regionId,
             @RequestParam(required = false) String categoryId,
             @RequestParam(required = false) String countryId) {
-
         ViewBlogRequest viewBlogRequest = new ViewBlogRequest(regionId, categoryId,countryId);
-        ApiResponse<List<ViewBlogResponse>> approvedcountryBlogs = blogService.getApprovedBlogsByFilters(viewBlogRequest);
-        return ResponseEntity.status(approvedcountryBlogs.getStatus()).body(approvedcountryBlogs);
+        ApiResponse<List<ViewBlogResponse>> approvedCountryBlogs = blogService.getApprovedBlogsByFilters(viewBlogRequest);
+        return ResponseEntity.status(approvedCountryBlogs.getStatus()).body(approvedCountryBlogs);
     }
 }
