@@ -35,6 +35,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         );
     }
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+
     @ExceptionHandler(InvalidFileFormatException.class)
     public ResponseEntity<ApiResponse<Void>> handleInvalidFileFormatException(InvalidFileFormatException ex) {
         ApiResponse<Void> apiResponse = ApiResponse.<Void>builder()
