@@ -1,11 +1,8 @@
 package com.admin_management_service.controller;
 
 import com.admin_management_service.dto.ApiResponse;
-import com.admin_management_service.dto.BlogResponse;
 import com.admin_management_service.entity.Blog;
-import com.admin_management_service.service.BlogServiceImpl;
-import jakarta.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
+import com.admin_management_service.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,17 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@AllArgsConstructor
 @RequiredArgsConstructor
 @RequestMapping("/admin-blog")
 public class BlogController {
-
-    private final BlogServiceImpl blogService;
-
-
+    private final BlogService blogService;
 
     @GetMapping
     public ResponseEntity<ApiResponse<Page<Blog>>> getAllBlogs(

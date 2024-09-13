@@ -2,6 +2,7 @@ package com.epam.travel.management.application.serviceImpl;
 
 import com.epam.travel.management.application.dto.ApiResponse;
 import com.epam.travel.management.application.dto.BlogRequest;
+import com.epam.travel.management.application.dto.ViewBlogResponse;
 import com.epam.travel.management.application.entity.Blog;
 import com.epam.travel.management.application.entity.UserResponse;
 import com.epam.travel.management.application.exceptions.UnauthorizedAccessException;
@@ -16,6 +17,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -127,5 +132,46 @@ public class BlogServiceImplTest {
 
         // Act & Assert
         assertThrows(UserNotFoundException.class, () -> blogService.createBlog(request, blogRequest));
+    }
+    @Test
+    void getApprovedBlogs_Success() {
+        List<Blog> approvedBlogs = new ArrayList<>();
+        Blog blog = Blog.builder()
+                .id(1L)
+                .title("Test Title")
+                .content("Test Content")
+                .userName("Test User")
+                .userProfileImage("Test Image")
+                .status("APPROVED")
+                .imageUrl("http://example.com/image")
+                .createdAt(new Date())
+                .countryId("1")
+                .regionId("1")
+                .categoryId("1")
+                .build();
+        approvedBlogs.add(blog);
+
+        when(blogRepository.findByStatus("APPROVED")).thenReturn(approvedBlogs);
+
+        ApiResponse<List<ViewBlogResponse>> response = blogService.getApprovedBlogs();
+
+        assertEquals(HttpStatus.OK.value(), response.getStatus());
+        assertEquals("Blogs retrieved successfully.", response.getMessage());
+        assertEquals(1, response.getData().size());
+        assertEquals("Test Title", response.getData().get(0).getTitle());
+        verify(blogRepository, times(1)).findByStatus("APPROVED");
+    }
+
+    @Test
+    void getApprovedBlogs_NoBlogsFound() {
+        List<Blog> emptyBlogs = new ArrayList<>();
+        when(blogRepository.findByStatus("APPROVED")).thenReturn(emptyBlogs);
+
+        ApiResponse<List<ViewBlogResponse>> response = blogService.getApprovedBlogs();
+
+        assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
+        assertEquals("No Blogs found.", response.getMessage());
+        assertEquals(0, response.getData().size());
+        verify(blogRepository, times(1)).findByStatus("APPROVED");
     }
 }
