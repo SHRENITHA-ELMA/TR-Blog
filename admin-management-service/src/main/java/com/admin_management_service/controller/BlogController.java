@@ -45,10 +45,7 @@
 //}
 package com.admin_management_service.controller;
 
-import com.admin_management_service.dto.AdminBlogRequest;
-import com.admin_management_service.dto.ApiResponse;
-import com.admin_management_service.dto.BlogResponse;
-import com.admin_management_service.dto.BlogStatusUpdateRequest;
+import com.admin_management_service.dto.*;
 import com.admin_management_service.service.BlogService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -65,6 +62,13 @@ public class BlogController {
         ApiResponse<BlogResponse> response=blogService.getAllBlogs(request);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
+    @PostMapping("/blogs/filter")
+    public ResponseEntity<ApiResponse<BlogResponse>> getFilteredBlogs(@RequestBody AdminBlogFilterRequest adminBlogFilterRequest)
+    {
+        ApiResponse<BlogResponse> response=blogService.getFilteredBlogs(adminBlogFilterRequest);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
 
     @PutMapping("/status")
     public ResponseEntity<ApiResponse<String>> updateBlogStatus(

@@ -1,5 +1,6 @@
 package com.admin_management_service.service;
 
+import com.admin_management_service.dto.AdminBlogFilterRequest;
 import com.admin_management_service.dto.ApiResponse;
 import com.admin_management_service.dto.BlogResponse;
 import com.admin_management_service.dto.BlogStatusUpdateRequest;
@@ -64,4 +65,25 @@ public class BlogService {
                         .build();
             }
         }
+
+    public ApiResponse<BlogResponse> getFilteredBlogs(AdminBlogFilterRequest adminBlogFilterRequest) {
+        log.info("called service");
+        // Call Feign client to get blogs from travel-management-service
+        ResponseEntity<ApiResponse<BlogResponse>> blogResponse = blogFeign.getFilteredBlogs(adminBlogFilterRequest);
+        log.info("ERROR WITH BLOGRESPONSE");
+
+        if (blogResponse.getBody().getData()==null) {
+            return ApiResponse.<BlogResponse>builder()
+                    .status(HttpStatus.NO_CONTENT.value())
+                    .message("No blogs found.")
+                    .data(null)
+                    .build();
+        }
+
+        return ApiResponse.<BlogResponse>builder()
+                .status(HttpStatus.OK.value())
+                .message("All blogs fetched successfully!")
+                .data(blogResponse.getBody().getData())
+                .build();
     }
+}

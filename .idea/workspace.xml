@@ -5,24 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e25e5ed6-35f7-447f-951c-02b0c33966e2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/ServiceDiscovery/src/main/java/com/ServiceDiscovery/ServiceDiscoveryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/ServiceDiscovery/src/main/java/com/ServiceDiscovery/ServiceDiscoveryApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/AdminManagementServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/AdminManagementServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/controller/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/controller/BlogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/dto/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/dto/ApiResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/dto/BlogResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/dto/BlogResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/entity/Blog.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/entity/Blog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/feign/BlogFeign.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/feign/BlogFeign.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/service/BlogService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/service/BlogServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/service/BlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/service/BlogService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/controller/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/controller/BlogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/dto/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/dto/ApiResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/handler/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/handler/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/repository/BlogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/repository/BlogRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/service/BlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/service/BlogService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/serviceImpl/BlogServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/serviceImpl/BlogServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travel-recommendation-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/travel-recommendation-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/controller/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/service/ProfileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/service/ProfileService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/serviceImpl/ProfileServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/serviceImpl/ProfileServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/controller/ProfileControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/controller/ProfileControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/serviceImpl/ProfileServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/serviceImpl/ProfileServiceImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +49,7 @@
     "Application.UserServiceApplication.executor": "Run",
     "JUnit.ProfileControllerTest.editUserProfile_ShouldHandleIOException.executor": "Run",
     "JUnit.ProfileControllerTest.executor": "Run",
-    "JUnit.ProfileServiceImplTest.executor": "Coverage",
+    "JUnit.ProfileServiceImplTest.executor": "Run",
     "JUnit.ProfileServiceImplTest.testGetProfileByUsers_UserFoundAndValidRole_ReturnsUserResponse.executor": "Run",
     "JUnit.ProfileServiceImplTest.testUpdateUserSuccessfully.executor": "Run",
     "JUnit.ProfileServiceImplTest.testUpdateUser_NoPasswordAndNoFile_ShouldRetainExistingValues.executor": "Run",
@@ -67,7 +60,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "feature/changes",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/shrenitha_elma/Desktop/Travel-recom-githyd/travel-recommendations-be",
+    "last_opened_file_path": "C:/TravelRecommendation/travel-recommendations-be",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
@@ -97,19 +90,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ServiceDiscoveryApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ServiceDiscovery.ServiceDiscoveryApplication" />
-      <module name="ServiceDiscovery" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ServiceDiscovery.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TravelServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.epam.travel.management.application.TravelServiceApplication" />
       <module name="travel-recommendation-service" />
@@ -132,6 +112,21 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProfileControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="user-management-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.epam.user.management.application.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.epam.user.management.application.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.epam.user.management.application.controller.ProfileControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -167,10 +162,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.UserServiceApplication" />
-        <item itemvalue="Application.ServiceDiscoveryApplication" />
-        <item itemvalue="Application.AdminManagementServiceApplication" />
-        <item itemvalue="Application.TravelServiceApplication" />
+        <item itemvalue="JUnit.ProfileControllerTest" />
         <item itemvalue="JUnit.ProfileServiceImplTest" />
+        <item itemvalue="Application.TravelServiceApplication" />
+        <item itemvalue="Application.AdminManagementServiceApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -197,6 +192,12 @@
           <url>file://$PROJECT_DIR$/ServiceDiscovery/src/main/java/com/ServiceDiscovery/ServiceDiscoveryApplication.java</url>
           <line>8</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/entity/Blog.java</url>
+          <line>54</line>
+          <properties field="city" class="com.admin_management_service.entity.Blog" />
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -40,7 +40,7 @@ public class ProfileController {
     @PutMapping(value = "/editProfile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ApiResponse<Void>> editUserProfile(HttpServletRequest request, @Valid @ModelAttribute UserProfileRequest userProfileRequest) throws IOException {
         String emailFromToken=tokenUtils.getEmailFromRequest(request);
-        profileService.updateUser(emailFromToken, userProfileRequest.getEmail(), userProfileRequest.getFirstName(), userProfileRequest.getLastName(), userProfileRequest.getGender(), userProfileRequest.getPassword(), userProfileRequest.getCountry(), userProfileRequest.getCity(), userProfileRequest.getFile());
+        profileService.updateUser(emailFromToken, userProfileRequest);
         ApiResponse<Void> apiResponse = ApiResponse.<Void>builder().status(HttpStatus.OK.value()).message("Profile updated successfully").build();
         return ResponseEntity.ok(apiResponse);
     }

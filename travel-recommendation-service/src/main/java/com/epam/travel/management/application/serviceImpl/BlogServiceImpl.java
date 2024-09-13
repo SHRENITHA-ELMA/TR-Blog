@@ -110,4 +110,36 @@ public class BlogServiceImpl implements BlogService {
                     .build();
         }
     }
+
+    @Override
+    public ApiResponse<BlogResponse> getFilteredBlogs(AdminBlogFilterRequest adminBlogFilterRequest) {
+//        if(adminBlogFilterRequest.getCountryId()!=null && adminBlogFilterRequest.getRegionId()!=null && adminBlogFilterRequest.getRegionId()!=null)
+//        {
+            try {
+                List<Blog> blog = blogRepository.getBlogsByCategoryIdOrRegionIdOrCountryId(adminBlogFilterRequest.getCategoryId(), adminBlogFilterRequest.getRegionId(), adminBlogFilterRequest.getCountryId());
+                if (blog.isEmpty()) {
+                    return ApiResponse.<BlogResponse>builder()
+                            .status(HttpStatus.NO_CONTENT.value())
+                            .message("No blogs found.")
+                            .data(null) // You might want to return an empty BlogResponse here instead
+                            .build();
+                }
+                BlogResponse blogResponse = BlogResponse.builder().blogs(blog).build();
+                System.out.println(blogResponse);
+                return ApiResponse.<BlogResponse>builder()
+                        .status(HttpStatus.OK.value())
+                        .message("All blogs fetched successfully")
+                        .data(blogResponse)
+                        .build();
+            }
+            catch(Exception e)
+            {
+                return ApiResponse.<BlogResponse>builder()
+                        .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                        .message("An error occured while fetching data")
+                        .data(null)
+                        .build();
+            }
+        //}
+    }
 }
