@@ -9,7 +9,6 @@ import com.admin_management_service.exceptions.CountryExists;
 import com.admin_management_service.exceptions.CountryNotFound;
 import com.admin_management_service.exceptions.NoCountriesPresent;
 import com.admin_management_service.exceptions.Verfication;
-import com.admin_management_service.feign.CountryFeign;
 import com.admin_management_service.utility.VerificationUtility;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -26,9 +25,6 @@ public class CountryService {
     private final ObjectMapper objectMapper;
 
     private VerificationUtility verificationUtility;
-
-    private final CountryFeign countryFeign;
-
 
     public String add(CountryDTO countryDTO,String Token){
         if(countryDAO.findById(countryDTO.getCountryCode()).isPresent()){
