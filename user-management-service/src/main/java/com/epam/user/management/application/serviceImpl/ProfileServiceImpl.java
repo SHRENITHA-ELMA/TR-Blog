@@ -122,7 +122,7 @@
 //        userRepository.save(updatedUser);
 //    }
 //}
-package com.epam.user.management.application.serviceimpl;
+package com.epam.user.management.application.serviceImpl;
 
 import com.epam.user.management.application.dto.UserProfileRequest;
 import com.epam.user.management.application.dto.UserResponse;
@@ -188,69 +188,127 @@ public class ProfileServiceImpl implements ProfileService {
             throw new UserNotFoundException("User not found with email: " + email);
         }
     }
+//    @Override
+//    public void updateUser(String emailFromToken, UserProfileRequest userProfileRequest) throws IOException{
+//        String email= userProfileRequest.getEmail();
+//        String firstName= userProfileRequest.getFirstName();
+//        String lastName= userProfileRequest.getLastName();
+//        String gender= userProfileRequest.getGender();
+//        String password= userProfileRequest.getPassword();
+//        String country= userProfileRequest.getCountry();
+//        String city= userProfileRequest.getCity();
+//        MultipartFile file= userProfileRequest.getFile();
+//        if (password != null && !password.isEmpty() && !isPasswordValid(password)) {
+//            throw new IllegalArgumentException("Password does not meet the required criteria.");
+//        }
+//        if(!emailFromToken.equals(email))
+//        {
+//            throw new EmailMismatchException("Email doesn't match");
+//        }
+//        if (file != null && !isFileTypeValid(file)) {
+//            throw new InvalidFileFormatException("File must be in JPEG,JPG or PNG format");
+//        }
+//        String filePath = "";
+//        if (file != null && !file.isEmpty()) {
+//            filePath = fileStorageService.storeFile(file);
+//        }
+//        Optional<User> optionalUser = userRepository.findByEmail(email);
+//        if (optionalUser.isEmpty()) {
+//            throw new UserNotFoundException("User not found with email: " + email);
+//        }
+//        User user = optionalUser.get();
+//        User.UserBuilder userBuilder = User.builder()
+//                .id(user.getId())
+//                .email(user.getEmail())
+//                .role(user.getRole())
+//                .isEnabled(user.isEnabled())
+//                .createdAt(user.getCreatedAt())
+//                .updatedAt(new Date())  // Set updated time
+//                .firstName(firstName)
+//                .lastName(lastName)
+//                .gender(gender)
+//                .city(city)
+//                .country(country);
+//        // Conditionally update password if it's not null
+//        if (password != null && !password.isEmpty()) {
+//            userBuilder.password(passwordEncoder.encode(password));
+//        } else {
+//            userBuilder.password(user.getPassword());  // Retain the existing password if not updating
+//        }
+//        // Conditionally update imageUrl if filePath is not empty
+//        if (!filePath.isEmpty()) {
+//            userBuilder.imageUrl(filePath);
+//        } else {
+//            userBuilder.imageUrl(user.getImageUrl());  // Retain the existing imageUrl if no new file
+//        }
+//        // Build the updated user object
+//        User updatedUser = userBuilder.build();
+//        UserResponse userResponse = new UserResponse();
+//        userResponse.setFirstName(updatedUser.getFirstName());
+//        userResponse.setLastName(updatedUser.getLastName());
+//        userResponse.setEmail(updatedUser.getEmail());
+//        userResponse.setGender(updatedUser.getGender());
+//        userResponse.setCity(updatedUser.getCity());
+//        userResponse.setCountry(updatedUser.getCountry());
+//        userResponse.setImageUrl(updatedUser.getImageUrl());
+//        userRepository.save(updatedUser);
+//    }
     @Override
-    public void updateUser(String emailFromToken, UserProfileRequest userProfileRequest) throws IOException{
-        String email= userProfileRequest.getEmail();
-        String firstName= userProfileRequest.getFirstName();
-        String lastName= userProfileRequest.getLastName();
-        String gender= userProfileRequest.getGender();
-        String password= userProfileRequest.getPassword();
-        String country= userProfileRequest.getCountry();
-        String city= userProfileRequest.getCity();
-        MultipartFile file= userProfileRequest.getFile();
+    public void updateUser(String emailFromToken, UserProfileRequest userProfileRequest) throws IOException {
+        validateUserProfileRequest(emailFromToken, userProfileRequest);
+        String filePath = handleFileUpload(userProfileRequest.getFile());
+        Optional<User> optionalUser = userRepository.findByEmail(userProfileRequest.getEmail());
+        if (optionalUser.isEmpty()) {
+            throw new UserNotFoundException("User not found with email: " + userProfileRequest.getEmail());
+        }
+        User user = buildUpdatedUser(optionalUser.get(), userProfileRequest, filePath);
+        userRepository.save(user);
+    }
+
+    private void validateUserProfileRequest(String emailFromToken, UserProfileRequest userProfileRequest) {
+        if (!emailFromToken.equals(userProfileRequest.getEmail())) {
+            throw new EmailMismatchException("Email doesn't match");
+        }
+        String password = userProfileRequest.getPassword();
         if (password != null && !password.isEmpty() && !isPasswordValid(password)) {
             throw new IllegalArgumentException("Password does not meet the required criteria.");
         }
-        if(!emailFromToken.equals(email))
-        {
-            throw new EmailMismatchException("Email doesn't match");
-        }
+        MultipartFile file = userProfileRequest.getFile();
         if (file != null && !isFileTypeValid(file)) {
-            throw new InvalidFileFormatException("File must be in JPEG,JPG or PNG format");
+            throw new InvalidFileFormatException("File must be in JPEG, JPG or PNG format");
         }
-        String filePath = "";
+    }
+
+    private String handleFileUpload(MultipartFile file) throws IOException {
         if (file != null && !file.isEmpty()) {
-            filePath = fileStorageService.storeFile(file);
+            return fileStorageService.storeFile(file);
         }
-        Optional<User> optionalUser = userRepository.findByEmail(email);
-        if (optionalUser.isEmpty()) {
-            throw new UserNotFoundException("User not found with email: " + email);
-        }
-        User user = optionalUser.get();
+        return "";
+    }
+
+    private User buildUpdatedUser(User user, UserProfileRequest request, String filePath) {
         User.UserBuilder userBuilder = User.builder()
                 .id(user.getId())
                 .email(user.getEmail())
                 .role(user.getRole())
                 .isEnabled(user.isEnabled())
                 .createdAt(user.getCreatedAt())
-                .updatedAt(new Date())  // Set updated time
-                .firstName(firstName)
-                .lastName(lastName)
-                .gender(gender)
-                .city(city)
-                .country(country);
-        // Conditionally update password if it's not null
-        if (password != null && !password.isEmpty()) {
-            userBuilder.password(passwordEncoder.encode(password));
+                .updatedAt(new Date())
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .gender(request.getGender())
+                .city(request.getCity())
+                .country(request.getCountry());
+        if (request.getPassword() != null && !request.getPassword().isEmpty()) {
+            userBuilder.password(passwordEncoder.encode(request.getPassword()));
         } else {
-            userBuilder.password(user.getPassword());  // Retain the existing password if not updating
+            userBuilder.password(user.getPassword());
         }
-        // Conditionally update imageUrl if filePath is not empty
         if (!filePath.isEmpty()) {
             userBuilder.imageUrl(filePath);
         } else {
-            userBuilder.imageUrl(user.getImageUrl());  // Retain the existing imageUrl if no new file
+            userBuilder.imageUrl(user.getImageUrl());
         }
-        // Build the updated user object
-        User updatedUser = userBuilder.build();
-        UserResponse userResponse = new UserResponse();
-        userResponse.setFirstName(updatedUser.getFirstName());
-        userResponse.setLastName(updatedUser.getLastName());
-        userResponse.setEmail(updatedUser.getEmail());
-        userResponse.setGender(updatedUser.getGender());
-        userResponse.setCity(updatedUser.getCity());
-        userResponse.setCountry(updatedUser.getCountry());
-        userResponse.setImageUrl(updatedUser.getImageUrl());
-        userRepository.save(updatedUser);
+        return userBuilder.build();
     }
 }

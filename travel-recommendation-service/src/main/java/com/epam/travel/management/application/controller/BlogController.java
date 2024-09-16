@@ -30,12 +30,18 @@ public class BlogController {
         ApiResponse<BlogResponse> response = blogService.getAllBlogs();
         return ResponseEntity.status(response.getStatus()).body(response);
     }
-    @PostMapping("/filter")
-    public ResponseEntity<ApiResponse<BlogResponse>> getFilteredBlogs(@RequestBody AdminBlogFilterRequest adminBlogFilterRequest)
-    {
-        ApiResponse<BlogResponse> response=blogService.getFilteredBlogs(adminBlogFilterRequest);
-        return ResponseEntity.status(response.getStatus()).body(response);
-    }
+//    @GetMapping("/filter")
+//    public ResponseEntity<ApiResponse<BlogResponse>> getFilteredBlogs(@RequestBody AdminBlogFilterRequest adminBlogFilterRequest)
+//    {
+//        ApiResponse<BlogResponse> response=blogService.getFilteredBlogs(adminBlogFilterRequest);
+//        return ResponseEntity.status(response.getStatus()).body(response);
+//    }
+@GetMapping("/filter")
+public ResponseEntity<ApiResponse<BlogResponse>> getFilteredBlogs(@RequestParam("categoryId") String categoryId,@RequestParam("regionId")String regionId,@RequestParam("countryId")String countryId)
+{
+    ApiResponse<BlogResponse> response=blogService.getFilteredBlogs(categoryId,regionId,countryId);
+    return ResponseEntity.status(response.getStatus()).body(response);
+}
 
     @PutMapping("/status")
     public ResponseEntity<ApiResponse<String>> updateBlogStatus(HttpServletRequest request,

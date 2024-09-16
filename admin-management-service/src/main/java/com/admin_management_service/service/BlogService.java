@@ -12,6 +12,7 @@ import lombok.extern.java.Log;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +21,7 @@ public class BlogService {
 
     private final BlogFeign blogFeign;
 
-        public ApiResponse<BlogResponse>getAllBlogs(HttpServletRequest request)
+        public ApiResponse<BlogResponse>getAllBlogs()
         {
 
                 log.info("called service");
@@ -66,12 +67,9 @@ public class BlogService {
             }
         }
 
-    public ApiResponse<BlogResponse> getFilteredBlogs(AdminBlogFilterRequest adminBlogFilterRequest) {
-        log.info("called service");
+    public ApiResponse<BlogResponse> getFilteredBlogs( String categoryId,String regionId,String countryId) {
         // Call Feign client to get blogs from travel-management-service
-        ResponseEntity<ApiResponse<BlogResponse>> blogResponse = blogFeign.getFilteredBlogs(adminBlogFilterRequest);
-        log.info("ERROR WITH BLOGRESPONSE");
-
+        ResponseEntity<ApiResponse<BlogResponse>> blogResponse = blogFeign.getFilteredBlogs(categoryId, regionId, countryId);
         if (blogResponse.getBody().getData()==null) {
             return ApiResponse.<BlogResponse>builder()
                     .status(HttpStatus.NO_CONTENT.value())

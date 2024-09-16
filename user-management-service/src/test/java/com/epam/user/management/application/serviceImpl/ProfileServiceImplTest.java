@@ -604,7 +604,7 @@ import static org.mockito.Mockito.*;
 public class ProfileServiceImplTest {
 
     @InjectMocks
-    private com.epam.user.management.application.serviceimpl.ProfileServiceImpl profileService;
+    private ProfileServiceImpl profileService;
     @Mock
     private UserRepository userRepository;
     @Mock

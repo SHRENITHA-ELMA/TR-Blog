@@ -48,28 +48,28 @@ package com.admin_management_service.controller;
 import com.admin_management_service.dto.*;
 import com.admin_management_service.service.BlogService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/adminBlog")
 public class BlogController {
 
     private final BlogService blogService;
     @GetMapping("/blogs/All")
-    public ResponseEntity<ApiResponse<BlogResponse>> getAllBlogs(HttpServletRequest request){
-        ApiResponse<BlogResponse> response=blogService.getAllBlogs(request);
+    public ResponseEntity<ApiResponse<BlogResponse>> getAllBlogs(){
+        ApiResponse<BlogResponse> response=blogService.getAllBlogs();
         return ResponseEntity.status(response.getStatus()).body(response);
     }
-    @PostMapping("/blogs/filter")
-    public ResponseEntity<ApiResponse<BlogResponse>> getFilteredBlogs(@RequestBody AdminBlogFilterRequest adminBlogFilterRequest)
+    @GetMapping("/blogs/filter")
+    public ResponseEntity<ApiResponse<BlogResponse>> getFilteredBlogs(@RequestParam("categoryId") String categoryId,@RequestParam("regionId")String regionId,@RequestParam("countryId")String countryId)
     {
-        ApiResponse<BlogResponse> response=blogService.getFilteredBlogs(adminBlogFilterRequest);
+        ApiResponse<BlogResponse> response=blogService.getFilteredBlogs(categoryId,regionId,countryId);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
-
-
     @PutMapping("/status")
     public ResponseEntity<ApiResponse<String>> updateBlogStatus(
             @RequestBody BlogStatusUpdateRequest request) {

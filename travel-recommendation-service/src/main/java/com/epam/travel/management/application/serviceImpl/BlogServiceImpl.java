@@ -112,11 +112,9 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public ApiResponse<BlogResponse> getFilteredBlogs(AdminBlogFilterRequest adminBlogFilterRequest) {
-//        if(adminBlogFilterRequest.getCountryId()!=null && adminBlogFilterRequest.getRegionId()!=null && adminBlogFilterRequest.getRegionId()!=null)
-//        {
+    public ApiResponse<BlogResponse> getFilteredBlogs(String categoryId,String regionId,String countryId) {
             try {
-                List<Blog> blog = blogRepository.getBlogsByCategoryIdOrRegionIdOrCountryId(adminBlogFilterRequest.getCategoryId(), adminBlogFilterRequest.getRegionId(), adminBlogFilterRequest.getCountryId());
+                List<Blog> blog = blogRepository.getBlogsByCategoryIdOrRegionIdOrCountryId(categoryId, regionId, countryId);
                 if (blog.isEmpty()) {
                     return ApiResponse.<BlogResponse>builder()
                             .status(HttpStatus.NO_CONTENT.value())
@@ -142,4 +140,5 @@ public class BlogServiceImpl implements BlogService {
             }
         //}
     }
+
 }

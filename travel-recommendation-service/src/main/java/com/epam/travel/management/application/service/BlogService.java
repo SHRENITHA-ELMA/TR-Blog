@@ -13,6 +13,6 @@ public interface BlogService {
 
     ApiResponse<BlogResponse> getAllBlogs();
 
-    ApiResponse<BlogResponse> getFilteredBlogs(AdminBlogFilterRequest adminBlogFilterRequest);
-    // ResponseEntity<?> updateBlogStatus(AdminBlogRequest adminBlogRequest);
+    ApiResponse<BlogResponse> getFilteredBlogs(String categoryId,String regionId,String countryId);
+
 }
