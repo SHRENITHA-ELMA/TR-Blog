@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
+//@AllArgsConstructor
 @RequiredArgsConstructor
 @RequestMapping("/admin-blog")
 public class BlogController {

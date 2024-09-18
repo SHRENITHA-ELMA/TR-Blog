@@ -1,10 +1,7 @@
 package com.admin_management_service.handler;
 
 import com.admin_management_service.dto.ResponseFormat;
-import com.admin_management_service.exceptions.CountryExists;
-import com.admin_management_service.exceptions.CountryNotFound;
-import com.admin_management_service.exceptions.NoCountriesPresent;
-import com.admin_management_service.exceptions.Verfication;
+import com.admin_management_service.exceptions.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -48,6 +45,23 @@ public class GlobalExceptionHandler {
         ResponseFormat responseFormat=ResponseFormat.builder().status("403").message(ex.getMessage()).build();
         return ResponseEntity.badRequest().body(responseFormat);
     }
+
+    @ExceptionHandler(ValueNotFoundException.class)
+    public ResponseEntity<?>handleValueNotFoundException (ValueNotFoundException ex){
+        ResponseFormat responseFormat=ResponseFormat.builder().status("401").message(ex.getMessage()).build();
+        return ResponseEntity.badRequest().body(responseFormat);
+    }
+    @ExceptionHandler(NullValueException.class)
+    public ResponseEntity<?>handleNullValueException(NullValueException ex){
+        ResponseFormat responseFormat=ResponseFormat.builder().status("401").message(ex.getMessage()).build();
+        return ResponseEntity.badRequest().body(responseFormat);
+    }
+    @ExceptionHandler(ValueExistsException.class)
+    public ResponseEntity<?>handleValueExistsException(ValueExistsException ex){
+        ResponseFormat responseFormat=ResponseFormat.builder().status("401").message(ex.getMessage()).build();
+        return ResponseEntity.badRequest().body(responseFormat);
+    }
+
 
 
 }
