@@ -34,7 +34,7 @@ public class Blog {
     private List<String> images;
 
     @Column(nullable = false)
-    private boolean isEnabled;
+    private String status;
 
     @CreationTimestamp
     private Date createdAt;

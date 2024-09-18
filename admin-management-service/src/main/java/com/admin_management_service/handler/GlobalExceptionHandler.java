@@ -46,22 +46,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(responseFormat);
     }
 
-    @ExceptionHandler(ValueNotFoundException.class)
-    public ResponseEntity<?>handleValueNotFoundException (ValueNotFoundException ex){
-        ResponseFormat responseFormat=ResponseFormat.builder().status("401").message(ex.getMessage()).build();
+    @ExceptionHandler(InvalidStatusException.class)
+    public ResponseEntity<?>handleInvalidStatusException(Verfication ex){
+        ResponseFormat responseFormat=ResponseFormat.builder().status("403").message(ex.getMessage()).build();
         return ResponseEntity.badRequest().body(responseFormat);
     }
-    @ExceptionHandler(NullValueException.class)
-    public ResponseEntity<?>handleNullValueException(NullValueException ex){
-        ResponseFormat responseFormat=ResponseFormat.builder().status("401").message(ex.getMessage()).build();
-        return ResponseEntity.badRequest().body(responseFormat);
-    }
-    @ExceptionHandler(ValueExistsException.class)
-    public ResponseEntity<?>handleValueExistsException(ValueExistsException ex){
-        ResponseFormat responseFormat=ResponseFormat.builder().status("401").message(ex.getMessage()).build();
-        return ResponseEntity.badRequest().body(responseFormat);
-    }
-
 
 
 }
