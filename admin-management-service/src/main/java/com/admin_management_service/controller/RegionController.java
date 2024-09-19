@@ -34,11 +34,10 @@ public class RegionController {
                 .build();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
     @PutMapping("regions")
-    public ResponseEntity<ApiResponse<Void>> update(@Valid @RequestBody RegionDTO regionDTO, @RequestHeader("Token") String token) {
+    public ResponseEntity<ApiResponse> update(@Valid @RequestBody RegionDTO regionDTO, @RequestHeader("Token") String token) {
         regionServiceImpl.update(regionDTO, token);
-        ApiResponse<Void> response = ApiResponse.<Void>builder()
+        ApiResponse response = ApiResponse.builder()
                 .status(HttpStatus.OK.value())
                 .message("Region updated successfully")
                 .build();

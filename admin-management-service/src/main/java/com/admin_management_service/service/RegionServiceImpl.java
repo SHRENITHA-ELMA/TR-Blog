@@ -14,17 +14,13 @@ import com.admin_management_service.utility.VerificationUtility;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class RegionServiceImpl implements RegionService {
     private final RegionDAO regionDAO;
-    //private final ObjectMapper objectMapper;
     private VerificationUtility verificationUtility;
-    //private final CountryFeign countryFeign;
-
     public List<Region> getall(){
         if(regionDAO.findAll().isEmpty()){
             throw new NullValueException("Add regions before Fetching");
@@ -56,9 +52,8 @@ public class RegionServiceImpl implements RegionService {
         Region region= regionOpt.get();
         region.setRegionName(regionDTO.getRegionName());
         regionDAO.save(region);
-        return "Region Update Success";
+        return "Region Updated Successfully";
     }
-
     public ApiResponse<Object> setRegionStatus(RegionStatusDTO regionStatusDTO, String token) {
         if (!verificationUtility.isValid(token)) {
             throw new Verfication("Admin verification failed.");

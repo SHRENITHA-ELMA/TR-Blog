@@ -14,10 +14,7 @@ import lombok.NoArgsConstructor;
 @Table
 public class Region {
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String regionId;
-
     private String regionName;
-
     private boolean enabled;
 }

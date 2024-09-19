@@ -1,29 +1,21 @@
 package com.admin_management_service.controller;
-
 import com.admin_management_service.dto.*;
 import com.admin_management_service.entity.Category;
 import com.admin_management_service.service.CategoryServiceImpl;
-
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
-
 @RestController
 @RequestMapping("category")
 @AllArgsConstructor
 public class CategoryController {
     private final CategoryServiceImpl categoryServiceImpl;
-
     @GetMapping("categories")
     public ResponseEntity<ApiResponse<List<Category>>> getAll() {
         List<Category> categories = categoryServiceImpl.getall();
-
         ApiResponse<List<Category>> response = ApiResponse.<List<Category>>builder()
                 .status(HttpStatus.OK.value())
                 .message("Categories fetched successfully")
@@ -40,11 +32,10 @@ public class CategoryController {
                 .build();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
     @PutMapping("categories")
-    public ResponseEntity<ApiResponse<Void>> update(@Valid @RequestBody CategoryDTO categoryDTO, @RequestHeader("Token") String token) {
+    public ResponseEntity<ApiResponse> updateCategory(@Valid @RequestBody CategoryDTO categoryDTO, @RequestHeader("Token") String token) {
         categoryServiceImpl.update(categoryDTO, token);
-        ApiResponse<Void> response = ApiResponse.<Void>builder()
+        ApiResponse response = ApiResponse.builder()
                 .status(HttpStatus.OK.value())
                 .message("Category updated successfully")
                 .build();

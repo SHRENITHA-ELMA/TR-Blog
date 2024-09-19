@@ -6,21 +6,28 @@
   <component name="ChangeListManager">
     <list default="true" id="e25e5ed6-35f7-447f-951c-02b0c33966e2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/controller/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/controller/BlogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/dto/BlogStatusUpdateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/dto/BlogStatusUpdateRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/feign/BlogFeign.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/feign/BlogFeign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/config/AdditionalResourceWebConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/config/ApplicationConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/config/JwtAuthenticationFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/config/SecurityConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/controller/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/controller/RegionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/controller/RegionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/dto/CategoryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/dto/CategoryDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/dto/CategoryStatusDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/dto/CategoryStatusDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/dto/RegionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/dto/RegionDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/dto/RegionStatusDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/dto/RegionStatusDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/entity/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/entity/Region.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/entity/Region.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/handler/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/handler/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/service/BlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/service/BlogService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/repository/CategoryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/repository/CategoryDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/repository/RegionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/repository/RegionDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/service/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/service/CategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/service/RegionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin-management-service/src/main/java/com/admin_management_service/service/RegionServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/controller/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/controller/BlogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/dto/BlogResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/dto/BlogResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/service/BlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/service/BlogService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/serviceImpl/BlogServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/serviceImpl/BlogServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travel-recommendation-service/src/test/java/com/epam/travel/management/application/controller/BlogControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/travel-recommendation-service/src/test/java/com/epam/travel/management/application/controller/BlogControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/travel-recommendation-service/src/test/java/com/epam/travel/management/application/serviceImpl/BlogServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/travel-recommendation-service/src/test/java/com/epam/travel/management/application/serviceImpl/BlogServiceImplTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/config/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/serviceImpl/ProfileServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/serviceImpl/ProfileServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/serviceImpl/ProfileServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/test/java/com/epam/user/management/application/serviceImpl/ProfileServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-management-service/src/main/java/com/epam/user/management/application/controller/AdminController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,16 +38,32 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;sharvani-raj&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/SHRENITHA-ELMA/TR-Blog.git&quot;,
+    &quot;accountId&quot;: &quot;b17fbeac-9f5c-44d9-9711-59709232e8a9&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2lslUWLkPX1owjdur1QARyKZf5D" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -59,6 +82,12 @@
     "JUnit.BlogServiceImplTest,createBlog_Unauthorized_MissingHeader and 2 more.executor": "Coverage",
     "JUnit.BlogServiceImplTest.executor": "Coverage",
     "JUnit.BlogServiceTest.executor": "Run",
+    "JUnit.CategoryControllerTest.executor": "Coverage",
+    "JUnit.CategoryControllerTest.testUpdateCategory.executor": "Run",
+    "JUnit.CategoryDTOTest.executor": "Coverage",
+    "JUnit.CategoryServiceImplTest.executor": "Coverage",
+    "JUnit.CategoryServiceImplTest.testAdd_Success.executor": "Run",
+    "JUnit.CategoryStatusDTOTest.executor": "Coverage",
     "JUnit.ProfileControllerTest.editUserProfile_ShouldHandleIOException.executor": "Run",
     "JUnit.ProfileControllerTest.executor": "Run",
     "JUnit.ProfileServiceImplTest.executor": "Run",
@@ -69,17 +98,30 @@
     "JUnit.ProfileServiceImplTest.testUpdateUser_SuccessfulUpdate_WithPasswordAndFile.executor": "Run",
     "JUnit.ProfileServiceImplTest.testUpdateUser_SuccessfulUpdate_WithValidPassword.executor": "Run",
     "JUnit.ProfileServiceImplTest.testUpdateWithOnlyMandatoryFields.executor": "Run",
+    "JUnit.RegionControllerTest.executor": "Coverage",
+    "JUnit.RegionDTOTest.executor": "Coverage",
+    "JUnit.RegionServiceImplTest.executor": "Coverage",
     "JUnit.com.admin_management_service in admin-management-service.executor": "Coverage",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "feature/changes",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/TravelRecommendation/travel-recommendations-be",
+    "last_opened_file_path": "C:/Users/sharvaniraj_chennama/Desktop/travel-recommendations-be",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\shrenitha_elma\Desktop\TR-BLOG-REPO\TR-Blog\travel-recommendation-service\src\main\java\com\epam\travel\management\application\exceptions" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.admin_management_service.dto" />
+      <recent name="com.admin_management_service.service" />
+      <recent name="com.admin_management_service.controller" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.epam.travel.management.application.dto" />
@@ -89,69 +131,77 @@
       <recent name="com.admin_management_service.config" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.AdminManagementServiceApplication">
-    <configuration name="AdminManagementServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.admin_management_service.AdminManagementServiceApplication" />
+  <component name="RunManager" selected="JUnit.RegionStatusDTOTest">
+    <configuration name="CategoryServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="admin-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.admin_management_service.*" />
+          <option name="PATTERN" value="com.admin_management_service.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.admin_management_service.service" />
+      <option name="MAIN_CLASS_NAME" value="com.admin_management_service.service.CategoryServiceImplTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.gateway.GatewayApplication" />
-      <module name="gateway" />
+    <configuration name="RegionControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="admin-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.gateway.*" />
+          <option name="PATTERN" value="com.admin_management_service.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.admin_management_service.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.admin_management_service.controller.RegionControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ServiceDiscoveryApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ServiceDiscovery.ServiceDiscoveryApplication" />
-      <module name="ServiceDiscovery" />
+    <configuration name="RegionDTOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="admin-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ServiceDiscovery.*" />
+          <option name="PATTERN" value="com.admin_management_service.dto.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.admin_management_service.dto" />
+      <option name="MAIN_CLASS_NAME" value="com.admin_management_service.dto.RegionDTOTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TravelServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.epam.travel.management.application.TravelServiceApplication" />
-      <module name="travel-recommendation-service" />
+    <configuration name="RegionServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="admin-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.epam.travel.management.application.*" />
+          <option name="PATTERN" value="com.admin_management_service.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.admin_management_service.service" />
+      <option name="MAIN_CLASS_NAME" value="com.admin_management_service.service.RegionServiceImplTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BlogServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="travel-recommendation-service" />
+    <configuration name="RegionStatusDTOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="admin-management-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.epam.travel.management.application.serviceImpl.*" />
+          <option name="PATTERN" value="com.admin_management_service.dto.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.epam.travel.management.application.serviceImpl" />
-      <option name="MAIN_CLASS_NAME" value="com.epam.travel.management.application.serviceImpl.BlogServiceImplTest" />
+      <option name="PACKAGE_NAME" value="com.admin_management_service.dto" />
+      <option name="MAIN_CLASS_NAME" value="com.admin_management_service.dto.RegionStatusDTOTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -172,11 +222,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GatewayApplication" />
-        <item itemvalue="Application.AdminManagementServiceApplication" />
-        <item itemvalue="Application.TravelServiceApplication" />
-        <item itemvalue="Application.ServiceDiscoveryApplication" />
-        <item itemvalue="JUnit.BlogServiceImplTest" />
+        <item itemvalue="JUnit.RegionStatusDTOTest" />
+        <item itemvalue="JUnit.RegionDTOTest" />
+        <item itemvalue="JUnit.RegionServiceImplTest" />
+        <item itemvalue="JUnit.CategoryServiceImplTest" />
+        <item itemvalue="JUnit.RegionControllerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -211,11 +261,6 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/ServiceDiscovery/src/main/java/com/ServiceDiscovery/ServiceDiscoveryApplication.java</url>
-          <line>8</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/travel-recommendation-service/src/main/java/com/epam/travel/management/application/serviceImpl/BlogServiceImpl.java</url>
           <line>135</line>
           <option name="timeStamp" value="4" />
@@ -235,20 +280,38 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/TR_Blog$RegionServiceImplTest.ic" NAME="RegionServiceImplTest Coverage Results" MODIFIED="1726687040905" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.admin_management_service.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TR_Blog$CategoryControllerTest.ic" NAME="CategoryControllerTest Coverage Results" MODIFIED="1726685987231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.admin_management_service.controller.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TR_Blog$CategoryStatusDTOTest.ic" NAME="CategoryStatusDTOTest Coverage Results" MODIFIED="1726679100222" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.admin_management_service.dto.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TR_Blog$CategoryDTOTest.ic" NAME="CategoryDTOTest Coverage Results" MODIFIED="1726678969543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.admin_management_service.dto.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TR_Blog$CategoryServiceImplTest.ic" NAME="CategoryServiceImplTest Coverage Results" MODIFIED="1726686872059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.admin_management_service.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TR_Blog$RegionControllerTest.ic" NAME="RegionControllerTest Coverage Results" MODIFIED="1726686545483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.admin_management_service.controller.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TR_Blog$com_admin_management_service_in_admin_management_service.ic" NAME="com.admin_management_service in admin-management-service Coverage Results" MODIFIED="1726476505505" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.admin_management_service.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/TR_Blog$BlogServiceImplTest.ic" NAME="BlogServiceImplTest Coverage Results" MODIFIED="1726479725837" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>com.epam.travel.management.application.serviceImpl.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/TR_Blog$ProfileServiceImplTest.ic" NAME="ProfileServiceImplTest Coverage Results" MODIFIED="1726036673157" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.epam.user.management.application.serviceImpl.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/TR_Blog$BlogControllerTest__1_.ic" NAME="BlogControllerTest (1) Coverage Results" MODIFIED="1726479058807" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>com.epam.travel.management.application.controller.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/TR_Blog$BlogControllerTest.ic" NAME="BlogControllerTest Coverage Results" MODIFIED="1726473335861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>com.admin_management_service.controllertest.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/TR_Blog$ProfileServiceImplTest.ic" NAME="ProfileServiceImplTest Coverage Results" MODIFIED="1726036673157" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>com.epam.user.management.application.serviceImpl.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/TR_Blog$com_admin_management_service_in_admin_management_service.ic" NAME="com.admin_management_service in admin-management-service Coverage Results" MODIFIED="1726476505505" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>com.admin_management_service.*</FILTER>
     </SUITE>
   </component>
 </project>
