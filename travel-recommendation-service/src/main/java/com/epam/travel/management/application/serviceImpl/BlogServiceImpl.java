@@ -1,6 +1,5 @@
 package com.epam.travel.management.application.serviceImpl;
 
-import com.admin_management_service.dto.FilterDataResponse;
 import com.epam.travel.management.application.dto.*;
 import com.epam.travel.management.application.entity.Blog;
 import com.epam.travel.management.application.entity.UserResponse;
@@ -8,12 +7,10 @@ import com.epam.travel.management.application.exceptions.ResourceNotFoundExcepti
 import com.epam.travel.management.application.exceptions.UnauthorizedAccessException;
 import com.epam.travel.management.application.exceptions.UserNotFoundException;
 import com.epam.travel.management.application.exceptions.InvalidStatusException;
-import com.epam.travel.management.application.feign.AdminBlogClient;
 import com.epam.travel.management.application.feign.UserClient;
 import com.epam.travel.management.application.repository.BlogRepository;
 import com.epam.travel.management.application.service.BlogService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +30,6 @@ public class BlogServiceImpl implements BlogService {
     private final BlogRepository blogRepository;
     private final UserClient userClient;
     private final FileStorageService fileStorageService;
-    private final AdminBlogClient adminBlogClient;
     private final ObjectMapper objectMapper;
 
     @Override
@@ -190,19 +186,6 @@ public class BlogServiceImpl implements BlogService {
                 return ApiResponse.<List<ViewBlogResponse>>builder()
                         .status(HttpStatus.NOT_FOUND.value())
                         .message("No blogs found for the given filters.")
-                        .data(null)
-                        .build();
-            }
-
-            // Fetch filter data from admin service
-            ResponseEntity<FilterDataResponse> responseEntity;
-            try {
-                responseEntity = adminBlogClient.getFilterData();
-            } catch (FeignException e) {
-                // Handle Feign client error
-                return ApiResponse.<List<ViewBlogResponse>>builder()
-                        .status(HttpStatus.BAD_GATEWAY.value())
-                        .message("Failed to retrieve filter data from the admin service.")
                         .data(null)
                         .build();
             }
