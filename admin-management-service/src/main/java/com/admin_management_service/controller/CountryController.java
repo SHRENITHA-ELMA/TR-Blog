@@ -47,5 +47,4 @@ public class CountryController {
         DeleteResponse deleteResponse= DeleteResponse.builder().status("200").message("Country Deleted Successfully").data(country).build();
         return ResponseEntity.ok(deleteResponse);
     }
-
 }

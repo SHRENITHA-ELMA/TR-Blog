@@ -1,11 +1,14 @@
 package com.admin_management_service.service;
 
-import com.admin_management_service.dto.AdminBlogFilterRequest;
-import com.admin_management_service.dto.ApiResponse;
-import com.admin_management_service.dto.BlogResponse;
-import com.admin_management_service.dto.BlogStatusUpdateRequest;
+import com.admin_management_service.dto.*;
+import com.admin_management_service.entity.Category;
+import com.admin_management_service.entity.Country;
+import com.admin_management_service.entity.Region;
 import com.admin_management_service.exceptions.InvalidStatusException;
 import com.admin_management_service.feign.BlogFeign;
+import com.admin_management_service.repository.CategoryDAO;
+import com.admin_management_service.repository.CountryDAO;
+import com.admin_management_service.repository.RegionDAO;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -14,12 +17,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Log
 public class BlogService {
 
     private final BlogFeign blogFeign;
+    private final CountryDAO countryDAO;
+    private final RegionDAO regionDAO;
+    private final CategoryDAO categoryDAO;
 
         public ApiResponse<BlogResponse>getAllBlogs()
         {
@@ -84,4 +92,11 @@ public class BlogService {
                 .data(blogResponse.getBody().getData())
                 .build();
     }
+    public FilterDataResponse getAllFilters(){
+        List<Country> countryData = countryDAO.findAll();
+        List<Region> regionData = regionDAO.findAll();
+        List<Category> categoryData = categoryDAO.findAll();
+        return new FilterDataResponse(countryData,regionData,categoryData);
+    }
+
 }

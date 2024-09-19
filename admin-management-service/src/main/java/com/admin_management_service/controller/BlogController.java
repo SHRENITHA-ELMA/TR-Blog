@@ -46,12 +46,16 @@
 package com.admin_management_service.controller;
 
 import com.admin_management_service.dto.*;
+import com.admin_management_service.entity.Country;
 import com.admin_management_service.service.BlogService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -75,5 +79,10 @@ public class BlogController {
             @RequestBody BlogStatusUpdateRequest request) {
         ApiResponse<String> response = blogService.updateBlogStatus(request);
         return ResponseEntity.status(response.getStatus()).body(response);
+    }
+    @GetMapping("/filterData")
+    public ResponseEntity<FilterDataResponse> getFilterData(){
+        FilterDataResponse responseData=blogService.getAllFilters();
+        return ResponseEntity.status(HttpStatus.OK).body(responseData);
     }
 }

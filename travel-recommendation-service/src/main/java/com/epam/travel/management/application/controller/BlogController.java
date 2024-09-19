@@ -11,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RequiredArgsConstructor
 @RestController
@@ -55,5 +57,20 @@ public ResponseEntity<ApiResponse<BlogResponse>> getFilteredBlogs(@RequestParam(
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Failed to update blog status.", null));
         }
+    }
+    @GetMapping
+    public ResponseEntity<ApiResponse<List<ViewBlogResponse>>> getApprovedBlogs(){
+        ApiResponse<List<ViewBlogResponse>> approvedBlogs = blogService.getApprovedBlogs();
+        return ResponseEntity.status(approvedBlogs.getStatus()).body(approvedBlogs);
+    }
+    @GetMapping("filters")
+    public ResponseEntity<ApiResponse<List<ViewBlogResponse>>> getApprovedFilters(
+            @RequestParam(required = false) String regionId,
+            @RequestParam(required = false) String categoryId,
+            @RequestParam(required = false) String countryId
+    ){
+        ViewBlogRequest viewBlogRequest = new ViewBlogRequest(regionId,categoryId,countryId);
+        ApiResponse<List<ViewBlogResponse>> approvedBlogs = blogService.getApprovedFilters(viewBlogRequest);
+        return ResponseEntity.status(approvedBlogs.getStatus()).body(approvedBlogs);
     }
 }
